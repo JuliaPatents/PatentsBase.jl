@@ -32,6 +32,9 @@ export classification
 # family-specific functions
 export applications, siblings
 
+# portfolio-specific functions
+export owner
+
 # computations
 export aggregate_families, citationgraph, cooccurrence
 
