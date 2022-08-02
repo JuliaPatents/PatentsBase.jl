@@ -1,0 +1,2 @@
+
+abstract type AbstractFulltext end

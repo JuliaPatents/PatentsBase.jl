@@ -46,9 +46,13 @@ export residence, ccode
 
 include("applicants.jl")
 include("applications.jl")
+include("claims.jl")
+include("descriptions.jl")
 include("families.jl")
+include("fulltexts.jl")
 include("inventors.jl")
 include("jurisdictions.jl")
+include("portfolios.jl")
 include("titles.jl")
 
 
