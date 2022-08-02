@@ -1,6 +1,6 @@
 
 """
-AbstractFamily
+    AbstractFamily
 
 An abstract type representing an interface for a patent family. 
 Concrete implementations, such as `PatentsLens.LensFamily`, should subtype this.
@@ -9,7 +9,7 @@ abstract type AbstractFamily end
 
 
 """
-applications(f::AbstractFamily)
+    applications(f::AbstractFamily)
 
 return a `Vector{<:AbstractApplication}` with all applications in family `f`.
 """
@@ -19,7 +19,7 @@ end
 
 
 """
-applicants(f::AbstractFamily)
+    applicants(f::AbstractFamily)
 
 return a `Vector{<:AbstractApplicant}` with the unique set of 
 applicants from all the applications in family `f`.

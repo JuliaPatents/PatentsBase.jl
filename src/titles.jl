@@ -1,6 +1,6 @@
 
 """
-AbstractTitle
+    AbstractTitle
 
 An abstract type representing an interface for the title(s) of a patent application. 
 Concrete implementations, such as `PatentsLens.LensTitle`, should subtype this.
@@ -9,7 +9,7 @@ abstract type AbstractTitle end
 
 
 """
-text(lang::String)
+    text(lang::String)
 
 Returns a `String` with the localized version of the title `t` for language `lang`.
 Concrete implementations should throw a `Base.KeyError` if there is no title for that locale.

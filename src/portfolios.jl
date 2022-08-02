@@ -1,6 +1,6 @@
 
 """
-AbstractPortfolio
+    AbstractPortfolio
 
 An abstract type representing an interface for an entity's patent portfolio. 
 Concrete implementations, such as `PatentsLens.LensPortfolio`, should subtype this.
@@ -9,7 +9,7 @@ abstract type AbstractPortfolio end
 
 
 """
-owner(p::AbstractPortfolio)
+    owner(p::AbstractPortfolio)
 
 return an `AbstractApplicant` representing the owner of portfolio `p`.
 """
@@ -19,7 +19,7 @@ end
 
 
 """
-applications(p::AbstractPortfolio)
+    applications(p::AbstractPortfolio)
 
 return a `Vector{<:AbstractApplication}` with all applications in portfolio `p`.
 """

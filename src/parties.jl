@@ -1,6 +1,6 @@
 
 """
-AbstractParty
+    AbstractParty
 
 An abstract type representing an interface for a patent application party.
 The two types of parties are applicants and inventors, represented by the types
@@ -11,7 +11,7 @@ abstract type AbstractParty end
 
 
 """
-AbstractInventor
+    AbstractInventor
 
 An abstract type representing an interface for an inventor. 
 Concrete implementations, such as `PatentsLens.LensInventor`, should subtype this.
@@ -20,7 +20,7 @@ abstract type AbstractInventor <: AbstractParty end
 
 
 """
-AbstractApplicant
+    AbstractApplicant
 
 An abstract type representing an interface for a patent applicant. 
 Concrete implementations, such as `PatentsLens.LensApplicant`, should subtype this.
@@ -29,7 +29,7 @@ abstract type AbstractApplicant <: AbstractParty end
 
 
 """
-name(p::AbstractParty)
+    name(p::AbstractParty)
 
 return the name of the party `p`.
 """
@@ -39,7 +39,7 @@ end
 
 
 """
-country(p::AbstractParty)
+    country(p::AbstractParty)
 
 return the country code of the country of residence of party `p`.
 """
@@ -49,7 +49,7 @@ end
 
 
 """
-names(a::AbstractApplicant)
+    names(a::AbstractApplicant)
 
 return a `Vector{String}` of all names under which applicant `a` is known to appear.
 """
@@ -59,7 +59,7 @@ end
 
 
 """
-referencename(a::AbstractApplicant)
+    referencename(a::AbstractApplicant)
 
 return the main name under which applicant `a` is known to appear.
 Base implementation simply returns the first element of `names(a::AbstractApplicant)`.
