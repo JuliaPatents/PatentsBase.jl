@@ -2,13 +2,15 @@ module PatentsBase
 
 using Dates
 
-# basic patent information types
+### Basic patent information types
+
 export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, LegalEvent
 
 export AbstractApplicant, AbstractInventor, AbstractJurisdiction
 
 export AbstractTitle, AbstractDescription, AbstractClaims, AbstractFulltext
 
+### Interface functions
 
 # parties
 export applicants, inventors
@@ -31,8 +33,18 @@ export applications, siblings
 # computations
 export aggregate_families, citationgraph, cooccurrence
 
+# names
+export name, names, referencename
+
+# locations
+export residence, ccode
+
+### Interface definitions
 
 include("applications.jl")
+include("applicants.jl")
+include("inventors.jl")
+include("jurisdictions.jl")
 include("families.jl")
 
 
