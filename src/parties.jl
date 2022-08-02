@@ -65,7 +65,7 @@ return the main name under which applicant `a` is known to appear.
 Base implementation simply returns the first element of `names(a::AbstractApplicant)`.
 """
 function referencename(a::AbstractApplicant)::String
-    isempty(names(a)) ? first(names(a)) : Error("Applicant has no known names.")
+    first(names(a))
 end
 
 name(a::AbstractApplicant) = referencename(a)
