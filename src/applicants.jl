@@ -2,8 +2,8 @@
 """
 AbstractApplicant
 
-An abstract type representing an interface for a patent applicant. Concrete implementations, 
-such as `PatentsLens.LensApplicant`, should subtype this.
+An abstract type representing an interface for a patent applicant. 
+Concrete implementations, such as `PatentsLens.LensApplicant`, should subtype this.
 """
 abstract type AbstractApplicant end
 

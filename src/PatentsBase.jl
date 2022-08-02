@@ -2,6 +2,7 @@ module PatentsBase
 
 using Dates
 
+
 ### Basic patent information types
 
 export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, LegalEvent
@@ -9,6 +10,7 @@ export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, Leg
 export AbstractApplicant, AbstractInventor, AbstractJurisdiction
 
 export AbstractTitle, AbstractDescription, AbstractClaims, AbstractFulltext
+
 
 ### Interface functions
 
@@ -19,7 +21,7 @@ export applicants, inventors
 export jurisdiction
 
 # content
-export title, description, claims, fulltext
+export title, description, claims, fulltext, text
 
 # application history
 export filingdate, publicationdate
@@ -39,13 +41,15 @@ export name, names, referencename
 # locations
 export residence, ccode
 
+
 ### Interface definitions
 
-include("applications.jl")
 include("applicants.jl")
+include("applications.jl")
+include("families.jl")
 include("inventors.jl")
 include("jurisdictions.jl")
-include("families.jl")
+include("titles.jl")
 
 
 # Trait-based interface to indicate available information at data source level?

@@ -2,8 +2,8 @@
 """
 AbstractInventor
 
-An abstract type representing an interface for an inventor. Concrete implementations, 
-such as `PatentsLens.LensInventor`, should subtype this.
+An abstract type representing an interface for an inventor. 
+Concrete implementations, such as `PatentsLens.LensInventor`, should subtype this.
 """
 abstract type AbstractInventor end
 
