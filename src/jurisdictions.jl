@@ -9,10 +9,10 @@ abstract type AbstractJurisdiction end
 
 
 """
-ccode(j::AbstractJurisdiction)
+country(j::AbstractJurisdiction)
 
 return the country code of the jurisdiction `j`.
 """
-function ccode(j::AbstractJurisdiction)::String
+function country(j::AbstractJurisdiction)::String
     throw(ArgumentError("$(typeof(j)) does not contain country information."))
 end

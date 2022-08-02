@@ -42,19 +42,18 @@ export aggregate_families, citationgraph, cooccurrence
 export name, names, referencename
 
 # locations
-export residence, ccode
+export country
 
 
 ### Interface definitions
 
-include("applicants.jl")
 include("applications.jl")
 include("claims.jl")
 include("descriptions.jl")
 include("families.jl")
 include("fulltexts.jl")
-include("inventors.jl")
 include("jurisdictions.jl")
+include("parties.jl")
 include("portfolios.jl")
 include("titles.jl")
 
