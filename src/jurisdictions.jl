@@ -14,5 +14,5 @@ ccode(j::AbstractJurisdiction)
 return the country code of the jurisdiction `j`.
 """
 function ccode(j::AbstractJurisdiction)::String
-    throw(ArgumentError("$(typeof(a)) does not contain country information."))
+    throw(ArgumentError("$(typeof(j)) does not contain country information."))
 end
