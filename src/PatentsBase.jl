@@ -15,7 +15,7 @@ export AbstractTitle, AbstractDescription, AbstractClaims, AbstractFulltext
 ### Interface functions
 
 # parties
-export applicants, inventors
+export applicants, inventors, name, names, referencename
 
 # filing authority
 export jurisdiction
@@ -38,24 +38,15 @@ export owner
 # computations
 export aggregate_families, citationgraph, cooccurrence
 
-# names
-export name, names, referencename
-
-# locations
-export country
-
 
 ### Interface definitions
 
 include("applications.jl")
-include("claims.jl")
-include("descriptions.jl")
 include("families.jl")
-include("fulltexts.jl")
+include("contents.jl")
 include("jurisdictions.jl")
 include("parties.jl")
 include("portfolios.jl")
-include("titles.jl")
 
 
 # Trait-based interface to indicate available information at data source level?
