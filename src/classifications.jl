@@ -5,25 +5,26 @@ Abstract type representing a system for technology classification of patents,
 such as the Cooperative Patent Classification (CPC).
 """
 abstract type AbstractClassificationSystem end
-abstract type IPCLike end
+abstract type IPCLikeSystem <: AbstractClassificationSystem end
 
-struct CPC <: IPCLike end
-struct IPC <: IPCLike end
+struct CPC <: IPCLikeSystem end
+struct IPC <: IPCLikeSystem end
 
 """
     AbstractClassification
 
-An abstract type representing a (hierarchical) patent classification.
+Abstract type representing a patent classification entry.
 Concrete implementations should each represent a single classification system.
 """
-abstract type AbstractClassification end
+abstract type AbstractClassificationSymbol end
+abstract type IPCLikeSymbol <: AbstractClassificationSymbol end
 
 """
     CPCSymbol
 
 Struct representing a technology classification entry according to the CPC.
 """
-struct CPCSymbol <: AbstractClassification
+struct CPCSymbol <: IPCLikeSymbol
     symbol::String
 end
 
@@ -45,25 +46,26 @@ struct Subgroup <: AbstractClassificationLevel end
 
 Obtain a vector of technology classification entries for application `a` according to classification system `c`.
 """
-function classification(c::AbstractClassificationSystem, a::AbstractApplication)::Vector{AbstractClassification}
+function classification(c::AbstractClassificationSystem, a::AbstractApplication)::Vector{AbstractClassificationSymbol}
     throw(ArgumentError("$(typeof(a)) does not contain classification information for classification system $(typeof(c))"))
 end
 
 classification(a::AbstractApplication) = classification(CPC(), a)
 
-function symbol(l::AbstractClassificationLevel, c::AbstractClassification)
+
+function symbol(l::AbstractClassificationLevel, c::AbstractClassificationSymbol)
     throw(ArgumentError("level $l not available for $(typeof(c))"))
 end
 
-symbol(::Section, c::IPCLike) = first(symbol(c), 1)
-symbol(::Class, c::IPCLike) = first(symbol(c), 3)
-symbol(::Subclass, c::IPCLike) = first(symbol(c), 4)
-symbol(::Maingroup, c::IPCLike) = first(symbol(c), 8)
-symbol(::Subgroup, c::IPCLike) = symbol(c)
-symbol(c::IPCLike) = symbol(::Subgroup, c)
+symbol(c::IPCLikeSymbol) = c.symbol
+symbol(::Section, c::IPCLikeSymbol) = first(symbol(c), 1)
+symbol(::Class, c::IPCLikeSymbol) = first(symbol(c), 3)
+symbol(::Subclass, c::IPCLikeSymbol) = first(symbol(c), 4)
+symbol(::Maingroup, c::IPCLikeSymbol) = first(symbol(c), 8)
+symbol(::Subgroup, c::IPCLikeSymbol) = symbol(c)
 
 
-function title(::AbstractClassificationLevel, c::AbstractClassification)
+function title(::AbstractClassificationLevel, c::AbstractClassificationSymbol)
     throw(ArgumentError("No title information available for $(typeof(c))"))
 end
 
