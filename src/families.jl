@@ -36,3 +36,15 @@ applicants from all the applications in family `f`.
 function applicants(f::AbstractFamily)::Vector{<:AbstractApplicant} 
     reduce(vcat, applicants.(applications(f)))
 end
+
+"""
+    classifications(a::AbstractApplication, system::String = "all")
+
+Return a `Vector{<:AbstractClassification}` with all classifications listed for 
+a patent family `f`. The `system` parameter can either be the abbreviated name 
+of a classification system, such as "CPC", or "all" to access classifications 
+of any system.
+"""
+function classifications(f::AbstractFamily, system::String = "all")::Vector{<:AbstractClassification}
+    reduce(vcat, (a -> classifications(a, system)).(applications(f)))
+end

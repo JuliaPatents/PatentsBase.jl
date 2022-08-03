@@ -19,6 +19,8 @@ end
     shortname(c::AbstractClassification)
 
 Return the abbreviated name of the classification system followed by classification `c`.
+Concrete implementations of this should never return "all", as it is a reserved
+value in related functions.
 """
 function shortname(c::AbstractClassification)::String
     throw(ArgumentError("$(typeof(c)) does not specify a short name."))

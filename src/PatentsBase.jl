@@ -12,6 +12,8 @@ export AbstractParty, AbstractApplicant, AbstractInventor, AbstractJurisdiction
 export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim, 
        AbstractClaims, AbstractFulltext
 
+export AbstractClassification, CPCClassification
+
 ### Interface functions
 
 # parties
@@ -27,7 +29,7 @@ export title, description, claims, fulltext, text
 export filingdate, publicationdate
 
 # technology classification
-export classification
+export classifications, shortname, symbol, hierarchy
 
 # family-specific functions
 export applications, siblings

@@ -39,3 +39,16 @@ return a `String` with the localized title of application `a` for language `lang
 function title(a::AbstractApplication, lang::String)::String
     text(title(a), lang)
 end
+
+
+"""
+    classifications(a::AbstractApplication, system::String = "all")
+
+Return a `Vector{<:AbstractClassification}` with all classifications listed for 
+a patent application `a`. The `system` parameter can either be the abbreviated 
+name of a classification system, such as "CPC", or "all" to access classifications 
+of any system.
+"""
+function classifications(a::AbstractApplication, system::String = "all")::Vector{<:AbstractClassification}
+    throw(ArgumentError("$(typeof(a)) does not contain classification information."))
+end
