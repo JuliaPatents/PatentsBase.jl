@@ -17,6 +17,15 @@ function applications(f::AbstractFamily)::Vector{<:AbstractApplication}
     throw(ArgumentError("$(typeof(f)) does not allow retrieval of individual applications."))
 end
 
+"""
+    siblings(a::AbstractApplication)
+
+return a `Vector{<:AbstractApplication}` with all applications that are in the same family as `a`.
+"""
+function siblings(a::AbstractApplication)::Vector{<:AbstractApplication}
+    throw(ArgumentError("$(typeof(a)) does not allow retrieval of sibling applications."))
+end
+
 
 """
     applicants(f::AbstractFamily)
