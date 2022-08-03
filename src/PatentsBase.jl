@@ -7,10 +7,10 @@ using Dates
 
 export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, LegalEvent
 
-export AbstractApplicant, AbstractInventor, AbstractJurisdiction
+export AbstractParty, AbstractApplicant, AbstractInventor, AbstractJurisdiction
 
-export AbstractTitle, AbstractDescription, AbstractClaims, AbstractFulltext
-
+export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim, 
+       AbstractClaims, AbstractFulltext
 
 ### Interface functions
 

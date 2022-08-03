@@ -22,7 +22,7 @@ end
 
 
 """
-    title(a::AbstractApplication, lang::String)
+    title(a::AbstractApplication)
 
 return a `AbstractTitle` with information about the title of application `a`.
 """
