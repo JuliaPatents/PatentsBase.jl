@@ -38,7 +38,7 @@ function applicants(f::AbstractFamily)::Vector{<:AbstractApplicant}
 end
 
 """
-    classifications(a::AbstractApplication, system::String = "all")
+    classifications(f::AbstractFamily, system::String = "all")
 
 Return a `Vector{<:AbstractClassification}` with all classifications listed for 
 a patent family `f`. The `system` parameter can either be the abbreviated name 
