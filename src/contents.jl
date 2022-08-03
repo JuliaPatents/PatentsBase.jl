@@ -2,8 +2,9 @@
     AbstractContent
 
 An abstract type representing an interface for content fields of a patent application.
-There are four abstract content fields that are subtypes of this type:
-`AbstractTitle`, `AbstractDescription`, `AbstractClaims`, `AbstractFulltext`.
+There are five abstract content fields that are subtypes of this type:
+`AbstractTitle`, `AbstractDescription`, `AbstractClaim`, `AbstractClaims`, 
+`AbstractFulltext`.
 """
 abstract type AbstractContent end
 
