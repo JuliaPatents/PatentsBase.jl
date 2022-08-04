@@ -11,10 +11,9 @@ struct CPC <: IPCLikeSystem end
 struct IPC <: IPCLikeSystem end
 
 """
-    AbstractClassification
+    AbstractClassificationSymbol
 
 Abstract type representing a patent classification entry.
-Concrete implementations should each represent a single classification system.
 """
 abstract type AbstractClassificationSymbol end
 abstract type IPCLikeSymbol <: AbstractClassificationSymbol end
@@ -25,6 +24,15 @@ abstract type IPCLikeSymbol <: AbstractClassificationSymbol end
 Struct representing a technology classification entry according to the CPC.
 """
 struct CPCSymbol <: IPCLikeSymbol
+    symbol::String
+end
+
+"""
+    IPCSymbol
+
+Struct representing a technology classification entry according to the IPC.
+"""
+struct IPCSymbol <: IPCLikeSymbol
     symbol::String
 end
 
