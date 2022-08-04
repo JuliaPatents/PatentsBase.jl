@@ -13,7 +13,9 @@ struct IPC <: IPCLikeSystem end
 """
     AbstractClassificationSymbol
 
-Abstract type representing a patent classification entry.
+Abstract type representing a patent classification entry. 
+Specific implementations should at least implement `symbol(c::AbstractClassificationSymbol)`
+and, if possible, also `title`.
 """
 abstract type AbstractClassificationSymbol end
 abstract type IPCLikeSymbol <: AbstractClassificationSymbol end
@@ -21,7 +23,7 @@ abstract type IPCLikeSymbol <: AbstractClassificationSymbol end
 """
     CPCSymbol
 
-Struct representing a technology classification entry according to the CPC.
+Struct representing a minimal technology classification entry according to the CPC.
 """
 struct CPCSymbol <: IPCLikeSymbol
     symbol::String
@@ -30,7 +32,7 @@ end
 """
     IPCSymbol
 
-Struct representing a technology classification entry according to the IPC.
+Struct representing a minimal technology classification entry according to the IPC.
 """
 struct IPCSymbol <: IPCLikeSymbol
     symbol::String
