@@ -87,7 +87,7 @@ classification(f::AbstractFamily) = classification(CPC(), f)
 Return a `String` representation of a classification symbol `c` down to a specified level `l`.
 If no level is specified, the complete symbol is returned.
 """
-function symbol::String end
+function symbol end
 
 function symbol(c::AbstractClassificationSymbol)
     throw(ArgumentError("No symbol information available for instances of $(typeof(c))"))
