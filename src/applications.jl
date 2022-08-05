@@ -52,3 +52,49 @@ of any system.
 function classifications(a::AbstractApplication, system::String = "all")::Vector{<:AbstractClassification}
     throw(ArgumentError("$(typeof(a)) does not contain classification information."))
 end
+
+
+"""
+    citations(a::AbstractApplication)
+
+Return a `Vector{<:AbstractCitation}` with all citations from the patent 
+application `a`. 
+"""
+function citations(a::AbstractApplication)::Vector{<:AbstractCitation}
+    throw(ArgumentError("$(typeof(a)) does not contain citation information."))
+end
+
+
+"""
+    patent_citations(a::AbstractApplication)
+
+Return a `Vector{<:AbstractPatentCitation}` with all patent citations from the 
+patent application `a`. 
+"""
+function patent_citations(a::AbstractApplication)::Vector{<:AbstractPatentCitation}
+    throw(ArgumentError("$(typeof(a)) does not contain patent citation information."))
+end
+
+
+"""
+    patent_citations(a::AbstractApplication)
+
+Return a `Vector{<:AbstractNPLCitation}` with all NPL citations from the patent 
+application `a`. 
+"""
+function npl_citations(a::AbstractApplication)::Vector{<:AbstractNPLCitation}
+    throw(ArgumentError("$(typeof(a)) does not contain NPL citation information."))
+end
+
+
+"""
+    citedby(a::AbstractApplication)
+
+Return a `Vector{<:AbstractPatentCitation}` with citations of all patent 
+applications known to cite the patent application `a`.
+Note that even though these are represented by the AbstractPatentCitation 
+interface, they are conceptually not citations in a strict sense.
+"""
+function citedby(a::AbstractApplication)::Vector{<:AbstractPatentCitation}
+    throw(ArgumentError("$(typeof(a)) does not contain forward citation information."))
+end

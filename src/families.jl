@@ -48,3 +48,45 @@ of any system.
 function classifications(f::AbstractFamily, system::String = "all")::Vector{<:AbstractClassification}
     reduce(vcat, (a -> classifications(a, system)).(applications(f)))
 end
+
+"""
+    citations(f::AbstractFamily)
+
+Return a `Vector{<:AbstractCitation}` with the aggregated citations from all 
+patent applications in the patent family `f`.
+"""
+function citations(f::AbstractFamily)::Vector{<:AbstractCitation}
+    reduce(vcat, citations.(applications(f)))
+end
+
+"""
+    patent_citations(f::AbstractFamily)
+
+Return a `Vector{<:AbstractPatentCitation}` with the aggregated patent citations 
+from all patent applications in the patent family `f`.
+"""
+function patent_citations(f::AbstractFamily)::Vector{<:AbstractPatentCitation}
+    reduce(vcat, patent_citations.(applications(f)))
+end
+
+"""
+    npl_citations(f::AbstractFamily)
+
+Return a `Vector{<:AbstractNPLCitation}` with the aggregated NPL citations from 
+all patent applications in the patent family `f`.
+"""
+function npl_citations(f::AbstractFamily)::Vector{<:AbstractNPLCitation}
+    reduce(vcat, patent_citations.(applications(f)))
+end
+
+"""
+    citedby(f::AbstractFamily)
+
+Return a `Vector{<:AbstractPatentCitation}` with citations of all patent 
+applications known to cite any of the patent applications in the family `f`.
+Note that even though these are represented by the AbstractPatentCitation 
+interface, they are conceptually not citations in a strict sense.
+"""
+function citedby(f::AbstractFamily)::Vector{<:AbstractPatentCitation}
+    reduce(vcat, citedby.(applications(f)))
+end

@@ -26,7 +26,7 @@ for language `lang`. Concrete implementations should throw a `Base.KeyError`
 if there is no title for that locale.
 """
 function text(c::AbstractContent, lang::String)::String
-    throw(ArgumentError("$(typeof(t)) does not contain localized information."))
+    throw(ArgumentError("$(typeof(c)) does not contain localized information."))
 end
 
 """
@@ -68,7 +68,7 @@ abstract type AbstractClaims  <: AbstractContent end
 Returns a `Vector{<:AbstractClaim}` with the individual claims of the claims field `c`.
 """
 function all(c::AbstractClaims)::Vector{<:AbstractClaim}
-    throw(ArgumentError("$(typeof(t)) does not allow retrieval of individual claims."))
+    throw(ArgumentError("$(typeof(c)) does not allow retrieval of individual claims."))
 end
 
 """
