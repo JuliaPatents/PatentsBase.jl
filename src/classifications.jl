@@ -53,24 +53,23 @@ struct Maingroup <: AbstractIPCLikeClassificationLevel end
 struct Subgroup <: AbstractIPCLikeClassificationLevel end
 
 """
+    classification(a::AbstractApplication)
+    classification(f::AbstractFamily)
     classification(c::AbstractClassificationSystem, a::AbstractApplication)
+    classification(c::AbstractClassificationSystem, f::AbstractFamily)
 
-Obtain a vector of technology classification entries for application `a` according to
-classification system `c`.
+Obtain a vector of technology classification entries for application `a` or family `f`
+according to classification system `c`. Defaults to CPC if no system is specified.
 """
+function classification end
+
 function classification(
     c::AbstractClassificationSystem,
     a::AbstractApplication
-)::Vector{AbstractClassificationSymbol}
+)::Vector{<:AbstractClassificationSymbol}
     throw(ArgumentError("$(typeof(a)) does not contain classification information for classification system $(typeof(c))"))
 end
 
-"""
-    classifications(c::AbstractClassificationSystem, f::AbstractFamily)
-
-Obtain a vector of technology classification entries for family `f` according to
-classification system `c`.
-"""
 function classification(
     c::AbstractClassificationSystem,
     f::AbstractFamily
@@ -80,6 +79,15 @@ end
 
 classification(a::AbstractApplication) = classification(CPC(), a)
 classification(f::AbstractFamily) = classification(CPC(), f)
+
+"""
+    symbol(c::AbstractClassificationSymbol)
+    symbol(::AbstractClassificationLevel, c::AbstractClassificationSymbol)
+
+Return a `String` representation of a classification symbol `c` down to a specified level `l`.
+If no level is specified, the complete symbol is returned.
+"""
+function symbol::String end
 
 function symbol(c::AbstractClassificationSymbol)
     throw(ArgumentError("No symbol information available for instances of $(typeof(c))"))
@@ -92,6 +100,12 @@ symbol(::Subclass, c::IPCLikeSymbol) = first(symbol(c), 4)
 symbol(::Maingroup, c::IPCLikeSymbol) = first(split(symbol(c), "/"))
 symbol(::Subgroup, c::IPCLikeSymbol) = symbol(c)
 
+"""
+    title(::AbstractClassificationLevel, c::AbstractClassificationSymbol)
+
+Return a `String` containing the full title of a classification `c` down to a specified
+level `l`.
+"""
 function title(::AbstractClassificationLevel, c::AbstractClassificationSymbol)
     throw(ArgumentError("No title information available for $(typeof(c))"))
 end

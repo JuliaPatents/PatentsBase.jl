@@ -75,83 +75,68 @@ end
 
 """
     citations(a::AbstractApplication)
+    citations(f::AbstractFamily)
 
-Return a `Vector{<:AbstractCitation}` with all citations from the patent application `a`.
+Return a `Vector{<:AbstractCitation}` with all citations from a patent application or family.
 """
+function citations end
+
 function citations(a::AbstractApplication)::Vector{<:AbstractCitation}
     throw(ArgumentError("$(typeof(a)) does not contain citation information."))
 end
 
-"""
-    citations(f::AbstractFamily)
-
-Return a `Vector{<:AbstractCitation}` with the aggregated citations from all patent
-applications in the patent family `f`.
-"""
 function citations(f::AbstractFamily)::Vector{<:AbstractCitation}
-    reduce(vcat, citations.(applications(f)))
+    return reduce(vcat, citations.(applications(f)))
 end
 
 """
     patent_citations(a::AbstractApplication)
+    patent_citations(f::AbstractFamily)
 
-Return a `Vector{<:AbstractPatentCitation}` with all patent citations from the patent
-application `a`.
+Return a `Vector{<:AbstractCitation}` with all patent citations from a patent application
+or family.
 """
+function patent_citations end
+
 function patent_citations(a::AbstractApplication)::Vector{<:AbstractPatentCitation}
     throw(ArgumentError("$(typeof(a)) does not contain patent citation information."))
 end
 
-"""
-    patent_citations(f::AbstractFamily)
-
-Return a `Vector{<:AbstractPatentCitation}` with the aggregated patent citations from all
-patent applications in the patent family `f`.
-"""
 function patent_citations(f::AbstractFamily)::Vector{<:AbstractPatentCitation}
-    reduce(vcat, patent_citations.(applications(f)))
+    return reduce(vcat, patent_citations.(applications(f)))
 end
 
 """
     npl_citations(a::AbstractApplication)
 
-Return a `Vector{<:AbstractNPLCitation}` with all NPL citations from the patent application
-`a`.
+Return a `Vector{<:AbstractNPLCitation}` with all NPL citations from a patent application
+or family.
 """
+function npl_citations end
+
 function npl_citations(a::AbstractApplication)::Vector{<:AbstractNPLCitation}
     throw(ArgumentError("$(typeof(a)) does not contain NPL citation information."))
 end
 
-"""
-    npl_citations(f::AbstractFamily)
-
-Return a `Vector{<:AbstractNPLCitation}` with the aggregated NPL citations from all patent
-applications in the patent family `f`.
-"""
 function npl_citations(f::AbstractFamily)::Vector{<:AbstractNPLCitation}
-    reduce(vcat, patent_citations.(applications(f)))
+    return reduce(vcat, patent_citations.(applications(f)))
 end
 
 """
     citedby(a::AbstractApplication)
+    citedby(f::AbstractFamily)
 
 Return a `Vector{<:AbstractPatentCitation}` with citations of all patent applications known
-to cite the patent application `a`.
+to cite a patent application or patent family.
 Note that even though these are represented by the AbstractPatentCitation interface, they
 are conceptually not citations in a strict sense.
 """
+function citedby end
+
 function citedby(a::AbstractApplication)::Vector{<:AbstractPatentCitation}
     throw(ArgumentError("$(typeof(a)) does not contain forward citation information."))
 end
 
-"""
-    citedby(f::AbstractFamily)
-
-Return a `Vector{<:AbstractPatentCitation}` with citations of all patent applications known
-to cite any of the patent applications in the family `f`.
-Note that even though these are represented by the AbstractPatentCitation interface, they
-are conceptually not citations in a strict sense.
-"""
 function citedby(f::AbstractFamily)::Vector{<:AbstractPatentCitation}
     reduce(vcat, citedby.(applications(f)))
 end

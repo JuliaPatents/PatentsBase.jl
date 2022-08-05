@@ -34,6 +34,8 @@ function name(p::AbstractParty)::String
     throw(ArgumentError("$(typeof(p)) does not contain name information."))
 end
 
+name(a::AbstractApplicant) = first(names(a))
+
 """
     names(a::AbstractApplicant)
 
@@ -42,8 +44,6 @@ return a `Vector{String}` of all names under which applicant `a` is known to app
 function names(a::AbstractApplicant)::Vector{String}
     throw(ArgumentError("$(typeof(a)) does not contain name information."))
 end
-
-name(a::AbstractApplicant) = first(names(a))
 
 """
     country(p::AbstractParty)
