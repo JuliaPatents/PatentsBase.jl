@@ -1,8 +1,8 @@
 """
     AbstractClassificationSystem
 
-Abstract type representing a system for technology classification of patents,
-such as the Cooperative Patent Classification (CPC).
+Abstract type representing a system for technology classification of patents, such as the
+Cooperative Patent Classification (CPC).
 """
 abstract type AbstractClassificationSystem end
 abstract type IPCLikeSystem <: AbstractClassificationSystem end
@@ -55,26 +55,31 @@ struct Subgroup <: AbstractIPCLikeClassificationLevel end
 """
     classification(c::AbstractClassificationSystem, a::AbstractApplication)
 
-Obtain a vector of technology classification entries for application `a` according to classification system `c`.
+Obtain a vector of technology classification entries for application `a` according to
+classification system `c`.
 """
-function classification(c::AbstractClassificationSystem, a::AbstractApplication)::Vector{AbstractClassificationSymbol}
+function classification(
+    c::AbstractClassificationSystem,
+    a::AbstractApplication
+)::Vector{AbstractClassificationSymbol}
     throw(ArgumentError("$(typeof(a)) does not contain classification information for classification system $(typeof(c))"))
 end
 
 """
-    classifications(f::AbstractFamily, system::String = "all")
+    classifications(c::AbstractClassificationSystem, f::AbstractFamily)
 
-Return a `Vector{<:AbstractClassification}` with all classifications listed for
-a patent family `f`. The `system` parameter can either be the abbreviated name
-of a classification system, such as "CPC", or "all" to access classifications
-of any system.
+Obtain a vector of technology classification entries for family `f` according to
+classification system `c`.
 """
-function classifications(f::AbstractFamily, system::String = "all")::Vector{<:AbstractClassification}
-    reduce(vcat, (a -> classifications(a, system)).(applications(f)))
+function classification(
+    c::AbstractClassificationSystem,
+    f::AbstractFamily
+)::Vector{<:AbstractClassificationSymbol}
+    reduce(vcat, (a -> classification(c, a)).(applications(f)))
 end
 
 classification(a::AbstractApplication) = classification(CPC(), a)
-
+classification(f::AbstractFamily) = classification(CPC(), f)
 
 function symbol(c::AbstractClassificationSymbol)
     throw(ArgumentError("No symbol information available for instances of $(typeof(c))"))

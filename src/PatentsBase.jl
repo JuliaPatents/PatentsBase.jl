@@ -8,8 +8,8 @@ export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, Leg
 
 export AbstractParty, AbstractApplicant, AbstractInventor, AbstractJurisdiction
 
-export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim,
-       AbstractClaims, AbstractFulltext
+export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim, AbstractClaims,
+    AbstractFulltext
 
 export AbstractClassification, CPCClassification
 
@@ -29,8 +29,7 @@ export jurisdiction
 export title, description, claims, fulltext, text
 
 # citations
-export citations, patent_citations, npl_citations, citedby, phase, application,
-       doi, bibentry
+export citations, patent_citations, npl_citations, citedby, phase, application, doi, bibentry
 
 # application history
 export filingdate, publicationdate

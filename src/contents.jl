@@ -52,8 +52,8 @@ abstract type AbstractFulltext  <: AbstractContent end
 """
     languages(c::AbstractContent)
 
-Returns a `Vector{String}` with all languages for which a version of the content
-field `c` is available.
+Returns a `Vector{String}` with all languages for which a version of the content field `c`
+is available.
 """
 function languages(c::AbstractContent)::Vector{String}
     throw(ArgumentError("$(typeof(c)) does not contain language information."))
@@ -62,9 +62,8 @@ end
 """
     text(c::AbstractContent, lang::String)
 
-Returns a `String` with the localized version of the text of content field `c`
-for language `lang`. Concrete implementations should throw a `Base.KeyError`
-if there is no title for that locale.
+Returns a `String` with the localized version of the text of content field `c` for language `lang`.
+Concrete implementations should throw a `Base.KeyError` if there is no title for that locale.
 """
 function text(c::AbstractContent, lang::String)::String
     throw(ArgumentError("$(typeof(c)) does not contain localized information."))
