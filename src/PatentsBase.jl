@@ -35,7 +35,7 @@ export citations, patent_citations, npl_citations, citedby, phase, application, 
 export filingdate, publicationdate
 
 # technology classification
-export classifications, shortname, symbol, hierarchy
+export classification, shortname, symbol, hierarchy
 
 # family-specific functions
 export applications, siblings
