@@ -30,7 +30,8 @@ export jurisdiction
 export title, description, claims, fulltext, text
 
 # citations
-export citations, citedby, phase, application, doi
+export citations, patent_citations, npl_citations, citedby, phase, application, 
+       doi
 
 # application history
 export filingdate, publicationdate
