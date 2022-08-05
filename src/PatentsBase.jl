@@ -14,6 +14,10 @@ export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim,
 
 export AbstractClassification, CPCClassification
 
+export AbstractCitation, AbstractPatentCitation, AbstractNPLCitation
+
+export AbstractDataSource
+
 ### Interface functions
 
 # parties
@@ -24,6 +28,9 @@ export jurisdiction
 
 # content
 export title, description, claims, fulltext, text
+
+# citations
+export citations, citedby, phase, application, doi
 
 # application history
 export filingdate, publicationdate
@@ -43,9 +50,11 @@ export aggregate_families, citationgraph, cooccurrence
 
 ### Interface definitions
 
+include("datasources.jl")
 include("applications.jl")
-include("families.jl")
 include("contents.jl")
+include("citations.jl")
+include("families.jl")
 include("jurisdictions.jl")
 include("parties.jl")
 include("portfolios.jl")

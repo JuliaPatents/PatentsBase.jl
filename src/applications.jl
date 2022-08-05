@@ -52,3 +52,13 @@ of any system.
 function classifications(a::AbstractApplication, system::String = "all")::Vector{<:AbstractClassification}
     throw(ArgumentError("$(typeof(a)) does not contain classification information."))
 end
+
+
+"""
+    citations(a::AbstractApplication)
+
+Return a `Vector{<:AbstractCitation}` with all works cited by the patent application `a`. 
+"""
+function citations(a::AbstractApplication)::Vector{<:AbstractCitation}
+    throw(ArgumentError("$(typeof(a)) does not contain citation information."))
+end
