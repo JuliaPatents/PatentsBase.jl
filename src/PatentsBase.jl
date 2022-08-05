@@ -2,14 +2,13 @@ module PatentsBase
 
 using Dates
 
-
 ### Basic patent information types
 
 export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, LegalEvent
 
 export AbstractParty, AbstractApplicant, AbstractInventor, AbstractJurisdiction
 
-export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim, 
+export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim,
        AbstractClaims, AbstractFulltext
 
 export AbstractClassification, CPCClassification
@@ -30,8 +29,8 @@ export jurisdiction
 export title, description, claims, fulltext, text
 
 # citations
-export citations, patent_citations, npl_citations, citedby, phase, application, 
-       doi
+export citations, patent_citations, npl_citations, citedby, phase, application,
+       doi, bibentry
 
 # application history
 export filingdate, publicationdate
@@ -48,18 +47,16 @@ export owner
 # computations
 export aggregate_families, citationgraph, cooccurrence
 
-
 ### Interface definitions
 
 include("datasources.jl")
 include("applications.jl")
 include("contents.jl")
-include("citations.jl")
 include("families.jl")
+include("citations.jl")
 include("jurisdictions.jl")
 include("parties.jl")
 include("portfolios.jl")
-
 
 # Trait-based interface to indicate available information at data source level?
 
@@ -78,6 +75,5 @@ include("portfolios.jl")
 # applicants(::NoApplicants, a::AbstractApplication) = error("$(typeof(a)) does not contain applicant information.")
 
 # applicants(a::AbstractApplication) = applicants(hasapplicants(datasource(a)), a)
-
 
 end

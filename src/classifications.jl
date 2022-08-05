@@ -13,7 +13,7 @@ struct IPC <: IPCLikeSystem end
 """
     AbstractClassificationSymbol
 
-Abstract type representing a patent classification entry. 
+Abstract type representing a patent classification entry.
 Specific implementations should at least implement `symbol(c::AbstractClassificationSymbol)`
 and, if possible, also `title`.
 """
@@ -61,6 +61,18 @@ function classification(c::AbstractClassificationSystem, a::AbstractApplication)
     throw(ArgumentError("$(typeof(a)) does not contain classification information for classification system $(typeof(c))"))
 end
 
+"""
+    classifications(f::AbstractFamily, system::String = "all")
+
+Return a `Vector{<:AbstractClassification}` with all classifications listed for
+a patent family `f`. The `system` parameter can either be the abbreviated name
+of a classification system, such as "CPC", or "all" to access classifications
+of any system.
+"""
+function classifications(f::AbstractFamily, system::String = "all")::Vector{<:AbstractClassification}
+    reduce(vcat, (a -> classifications(a, system)).(applications(f)))
+end
+
 classification(a::AbstractApplication) = classification(CPC(), a)
 
 
@@ -74,7 +86,6 @@ symbol(::Class, c::IPCLikeSymbol) = first(symbol(c), 3)
 symbol(::Subclass, c::IPCLikeSymbol) = first(symbol(c), 4)
 symbol(::Maingroup, c::IPCLikeSymbol) = first(split(symbol(c), "/"))
 symbol(::Subgroup, c::IPCLikeSymbol) = symbol(c)
-
 
 function title(::AbstractClassificationLevel, c::AbstractClassificationSymbol)
     throw(ArgumentError("No title information available for $(typeof(c))"))
