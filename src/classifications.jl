@@ -74,7 +74,7 @@ function classification(
     c::AbstractClassificationSystem,
     f::AbstractFamily
 )::Vector{<:AbstractClassificationSymbol}
-    reduce(vcat, (a -> classification(c, a)).(applications(f)))
+    reduce(vcat, classification.(c, applications(f))) |> unique
 end
 
 classification(a::AbstractApplication) = classification(CPC(), a)
