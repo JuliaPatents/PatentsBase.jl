@@ -44,12 +44,13 @@ end
 Abstract type representing a level in a hierarchical technology classification system.
 """
 abstract type AbstractClassificationLevel end
+abstract type AbstractIPCLikeClassificationLevel <: AbstractClassificationLevel end
 
-struct Section <: AbstractClassificationLevel end
-struct Class <: AbstractClassificationLevel end
-struct Subclass <: AbstractClassificationLevel end
-struct Maingroup <: AbstractClassificationLevel end
-struct Subgroup <: AbstractClassificationLevel end
+struct Section <: AbstractIPCLikeClassificationLevel end
+struct Class <: AbstractIPCLikeClassificationLevel end
+struct Subclass <: AbstractIPCLikeClassificationLevel end
+struct Maingroup <: AbstractIPCLikeClassificationLevel end
+struct Subgroup <: AbstractIPCLikeClassificationLevel end
 
 """
     classification(c::AbstractClassificationSystem, a::AbstractApplication)
@@ -63,15 +64,15 @@ end
 classification(a::AbstractApplication) = classification(CPC(), a)
 
 
-function symbol(l::AbstractClassificationLevel, c::AbstractClassificationSymbol)
-    throw(ArgumentError("level $l not available for $(typeof(c))"))
+function symbol(c::AbstractClassificationSymbol)
+    throw(ArgumentError("No symbol information available for instances of $(typeof(c))"))
 end
 
 symbol(c::IPCLikeSymbol) = c.symbol
 symbol(::Section, c::IPCLikeSymbol) = first(symbol(c), 1)
 symbol(::Class, c::IPCLikeSymbol) = first(symbol(c), 3)
 symbol(::Subclass, c::IPCLikeSymbol) = first(symbol(c), 4)
-symbol(::Maingroup, c::IPCLikeSymbol) = first(symbol(c), 8)
+symbol(::Maingroup, c::IPCLikeSymbol) = first(split(symbol(c), "/"))
 symbol(::Subgroup, c::IPCLikeSymbol) = symbol(c)
 
 
