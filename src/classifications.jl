@@ -28,6 +28,7 @@ Struct representing a minimal technology classification entry according to the C
 struct CPCSymbol <: IPCLikeSymbol
     symbol::String
 end
+StructTypes.StructType(::Type{CPCSymbol}) = StructTypes.Struct()
 
 """
     IPCSymbol
@@ -37,6 +38,7 @@ Struct representing a minimal technology classification entry according to the I
 struct IPCSymbol <: IPCLikeSymbol
     symbol::String
 end
+StructTypes.StructType(::Type{IPCSymbol}) = StructTypes.Struct()
 
 """
     AbstractClassificationLevel

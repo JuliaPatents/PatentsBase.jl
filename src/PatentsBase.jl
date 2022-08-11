@@ -1,6 +1,7 @@
 module PatentsBase
 
 using Dates
+using StructTypes
 
 ### Basic patent information types
 
@@ -11,7 +12,10 @@ export AbstractParty, AbstractApplicant, AbstractInventor, AbstractJurisdiction
 export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim, AbstractClaims,
     AbstractFulltext
 
-export AbstractClassification, CPCClassification
+export AbstractClassificationSystem, IPCLikeSystem, CPC, IPC,
+    AbstractClassificationSymbol, IPCLikeSymbol, CPCSymbol, IPCSymbol,
+    AbstractClassificationLevel, AbstractIPCLikeClassificationLevel,
+    Section, Class, Subclass, Maingroup, Subgroup
 
 export AbstractCitation, AbstractPatentCitation, AbstractNPLCitation
 
@@ -35,7 +39,7 @@ export citations, patent_citations, npl_citations, citedby, phase, application, 
 export filingdate, publicationdate
 
 # technology classification
-export classification, shortname, symbol, hierarchy
+export classification, symbol
 
 # family-specific functions
 export applications, siblings
