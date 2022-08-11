@@ -68,7 +68,7 @@ Returns a `String` with the Digital Object Identifier (DOI) for NPL citation `c`
 If multiple IDs matching the DOI format are found, the first is returned.
 Returns `nothing` if no ID field matches the DOI format.
 """
-function doi(c::AbstractNPLCitation)::String
+function doi(c::AbstractNPLCitation)::Union{String, Nothing}
     matching = filter(id -> match(r"10\.[\d\.]*\/.*", id) !== nothing, external_ids(c))
     isempty(matching) ? nothing : first(matching)
 end
