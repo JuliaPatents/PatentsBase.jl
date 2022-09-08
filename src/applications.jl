@@ -91,7 +91,9 @@ end
 
 function refers_to(ref::AbstractApplicationID, app::AbstractApplication)
     try
-        return jurisdiction(app) == jurisdiction(ref) && doc_number(ref) == doc_number(app)
+        return jurisdiction(app) == jurisdiction(ref) &&
+            doc_number(app) == doc_number(ref) &&
+            kind(app) == kind(ref)
     catch ex
         isa(ex, ArgumentError) ? false : throw(ex)
     end
