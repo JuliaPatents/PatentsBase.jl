@@ -19,8 +19,19 @@ end
 """
     siblings(a::AbstractApplication)
 
-return a `Vector{<:AbstractApplication}` with all applications that are in the same family as `a`.
+return a `Vector{<:AbstractApplicationReference}` with references to all applications that
+are in the same family as `a`.
 """
-function siblings(a::AbstractApplication)::Vector{<:AbstractApplication}
+function siblings(a::AbstractApplication)::Vector{<:AbstractApplicationReference}
     throw(ArgumentError("$(typeof(a)) does not allow retrieval of sibling applications."))
+end
+
+"""
+    siblings(a::AbstractApplication, ds::AbstractDataSource)
+
+return a `Vector{<:AbstractApplication}` with all applications from the data source `ds`
+that are in the same family as `a`.
+"""
+function siblings(a::AbstractApplication, ds::AbstractDataSource)::Vector{<:AbstractApplication}
+    throw(ArgumentError("$(typeof(a)) does not allow retrieval of sibling applications from $(typeof(ds))."))
 end

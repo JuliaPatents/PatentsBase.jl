@@ -7,7 +7,7 @@ using StructTypes
 
 export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, LegalEvent
 
-export AbstractParty, AbstractApplicant, AbstractInventor, AbstractJurisdiction
+export AbstractParty, AbstractApplicant, AbstractInventor
 
 export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim, AbstractClaims,
     AbstractFulltext
@@ -19,15 +19,15 @@ export AbstractClassificationSystem, IPCLikeSystem, CPC, IPC,
 
 export AbstractCitation, AbstractPatentCitation, AbstractNPLCitation
 
-export AbstractDataSource
+export AbstractDataSource, AbstractApplicationReference, AbstractApplicationID
 
 ### Interface functions
 
 # parties
 export applicants, inventors, name, names, referencename
 
-# filing authority
-export jurisdiction
+# document identifiers and base information
+export jurisdiction, doc_number, kind
 
 # content
 export title, description, claims, fulltext, text
@@ -42,23 +42,25 @@ export filingdate, publicationdate
 export classification, symbol
 
 # family-specific functions
-export applications, siblings
+export families, applications, siblings
 
 # portfolio-specific functions
 export owner
+
+# data sources and lookup
+export refers_to, find_application
 
 # computations
 export aggregate_families, citationgraph, cooccurrence
 
 ### Interface definitions
 
-include("datasources.jl")
 include("applications.jl")
+include("datasources.jl")
 include("contents.jl")
 include("families.jl")
 include("classifications.jl")
 include("citations.jl")
-include("jurisdictions.jl")
 include("parties.jl")
 include("portfolios.jl")
 

@@ -33,14 +33,22 @@ function phase(c::AbstractCitation)::String
 end
 
 """
-    application(c::AbstractPatentCitation, ds::AbstractDataSource)
+    reference(c::AbstractPatentCitation)
+
+Return an `AbstractApplicationReference` for the application cited in `c`.
+"""
+function reference(c::AbstractPatentCitation)::(<:AbstractApplicationReference)
+    throw(ArgumentError("$(typeof(c)) cannot be converted to ApplicationReference"))
+end
+
+"""
+    find_application(c::AbstractPatentCitation, ds::AbstractDataSource)
 
 Attempt to retrieve the patent application referenced by the citation `c` from the data
-source `ds` and return it. Concrete implementations should throw a `Base.KeyError` if the
-document is not available.
+source `ds` and return it, or return `nothing` if it cannot be found.
 """
-function application(c::AbstractPatentCitation, ds::AbstractDataSource)::(<:AbstractApplication)
-    throw(ArgumentError("$(typeof(ds)) does not allow lookup of $(typeof(c))"))
+function find_application(c::AbstractPatentCitation, ds::AbstractDataSource)::(<:AbstractApplication)
+    find_application(reference(c), ds)
 end
 
 """
