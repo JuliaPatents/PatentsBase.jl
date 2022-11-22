@@ -50,6 +50,13 @@ export owner
 # data sources and lookup
 export refers_to, find_application
 
+# data filters
+export AbstractFilter, ClassificationFilter, ContentFilter, UnionFilter, IntersectionFilter,
+    AllFilter
+
+# full-text search
+export SearchableContentField, TitleSearch, AbstractSearch, ClaimsSearch, FulltextSearch
+
 # computations
 export aggregate_families, citationgraph, cooccurrence
 
@@ -63,6 +70,7 @@ include("classifications.jl")
 include("citations.jl")
 include("parties.jl")
 include("portfolios.jl")
+include("filters.jl")
 
 # Trait-based interface to indicate available information at data source level?
 
