@@ -48,7 +48,7 @@ Optional keyword arguments:
 * `ignore_fulltext`: If true, full text information will not be retrieved.
     This may be used to improve runtime and memory footprint for large datasets.
 """
-function families(ds::AbstractDataSource, filter::AbstractFilter = LensAllFilter();
+function families(ds::AbstractDataSource, filter::AbstractFilter = AllFilter();
     ignore_fulltext::Bool = false)::Vector{<:AbstractFamily}
 
     throw(ArgumentError("$(typeof(ds)) does not allow retrieval of all families"))
