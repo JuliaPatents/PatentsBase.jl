@@ -49,6 +49,34 @@ Concrete implementations, such as `PatentsLens.LensFulltext`, should subtype thi
 """
 abstract type AbstractFulltext  <: AbstractContent end
 
+"Abstract type representing a fulltext-searchable application content field."
+abstract type SearchableContentField end
+
+struct TitleSearch <: SearchableContentField end
+struct AbstractSearch <: SearchableContentField end
+struct ClaimsSearch <: SearchableContentField end
+struct FulltextSearch <: SearchableContentField end
+
+"""
+Struct representing a database filter using full-text search on various content fields.
+* `search_query`: The keyword(s), phrase(s) or complex query to be used for the search.
+    Query syntax may vary across data sources, but should be broadly similar to
+    https://www.sqlite.org/fts5.html#full_text_query_syntax.
+* `field`: Specifies which `SearchableContentField` is used for the search.
+    Possible values are `TitleSearch()`, `AbstractSearch()`, `ClaimsSearch()`, or `FulltextSearch()`
+* `languages`: A vector of two-character language codes specifying the languages for which matches are included.
+    If an empty vector is passed (as by default), all available languages are included.
+"""
+Base.@kwdef struct ContentFilter <: AbstractFilter
+    search_query::String
+    field::SearchableContentField
+    languages::Vector{String} = []
+end
+
+function ContentFilter(search_query::String, field::SearchableContentField)
+    ContentFilter(search_query, field, Vector{String}())
+end
+
 """
     languages(c::AbstractContent)
 

@@ -62,15 +62,15 @@ export aggregate_families, citationgraph, cooccurrence
 
 ### Interface definitions
 
-include("applications.jl")
 include("datasources.jl")
+include("filters.jl")
+include("applications.jl")
 include("contents.jl")
 include("families.jl")
 include("classifications.jl")
 include("citations.jl")
 include("parties.jl")
 include("portfolios.jl")
-include("filters.jl")
 
 # Trait-based interface to indicate available information at data source level?
 

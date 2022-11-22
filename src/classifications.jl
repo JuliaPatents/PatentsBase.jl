@@ -55,6 +55,18 @@ struct Maingroup <: AbstractIPCLikeClassificationLevel end
 struct Subgroup <: AbstractIPCLikeClassificationLevel end
 
 """
+Struct representing a database filter by IPC-like classification.
+* `system`: The classification system used. Can be either `IPC()` or `CPC()`.
+* `level`: The `AbstractIPCLikeClassificationLevel` at which to filter (`Section()`, `Class()`, `Subclass()` etc.)
+* `symbols`: A `Vector{IPCLikeSymbol}` of all classifications included. The filter will match any application classified by at least one of these.
+"""
+struct ClassificationFilter <: AbstractFilter
+    system::IPCLikeSystem
+    level::AbstractIPCLikeClassificationLevel
+    symbols::Vector{<:IPCLikeSymbol}
+end
+
+"""
     classification(a::AbstractApplication)
     classification(f::AbstractFamily)
     classification(c::AbstractClassificationSystem, a::AbstractApplication)
