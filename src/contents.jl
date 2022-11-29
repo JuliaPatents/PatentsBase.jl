@@ -58,14 +58,24 @@ struct ClaimsSearch <: SearchableContentField end
 struct FulltextSearch <: SearchableContentField end
 
 """
+    ContentFilter(search_query::String, field::SearchableContentField, [languages::Vector{String}])
+    ContentFilter(search_query::String, fields::Vector{<:SearchableContentField}, [languages::Vector{String}])
+
 Struct representing a database filter using full-text search on various content fields.
+
+Parameters:
+
 * `search_query`: The keyword(s), phrase(s) or complex query to be used for the search.
     Query syntax may vary across data sources, but should be broadly similar to
     https://www.sqlite.org/fts5.html#full_text_query_syntax.
-* `field`: Specifies which `SearchableContentField` is used for the search.
-    Possible values are `TitleSearch()`, `AbstractSearch()`, `ClaimsSearch()`, or `FulltextSearch()`
-* `languages`: A vector of two-character language codes specifying the languages for which matches are included.
+
+* `field` / `fields`: Specifies which `SearchableContentField`(s) is/are used for the search.
+    Possible values are `TitleSearch()`, `AbstractSearch()`, `ClaimsSearch()`, or `FulltextSearch()`.
+    A vector can be passed, in which case the constructor actually creates a `UnionFilter`.
+
+* `languages` (optional): A vector of two-character language codes specifying the languages for which matches are included.
     If an empty vector is passed (as by default), all available languages are included.
+
 """
 Base.@kwdef struct ContentFilter <: AbstractFilter
     search_query::String
@@ -75,6 +85,14 @@ end
 
 function ContentFilter(search_query::String, field::SearchableContentField)
     ContentFilter(search_query, field, Vector{String}())
+end
+
+function ContentFilter(search_query::String, fields::Vector{<:SearchableContentField}, languages::Vector{String})
+    foldl(|, (f -> ContentFilter(search_query, f, languages)).(fields))
+end
+
+function ContentFilter(search_query::String, fields::Vector{<:SearchableContentField})
+    foldl(|, (f -> ContentFilter(search_query, f)).(fields))
 end
 
 """
