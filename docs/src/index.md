@@ -4,7 +4,7 @@ CurrentModule = PatentsBase
 
 # PatentsBase
 
-Documentation for [PatentsBase](https://github.com/jfb-h/PatentsBase.jl).
+Documentation for [PatentsBase](https://github.com/JuliaPatents/PatentsBase.jl).
 
 ```@index
 ```

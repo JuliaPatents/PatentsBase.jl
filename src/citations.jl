@@ -1,22 +1,16 @@
 
 """
-    AbstractCitation
-
 An abstract type representing an interface for a citation in a patent application.
 """
 abstract type AbstractCitation end
 
 """
-    AbstractPatentCitation
-
 An abstract type representing an interface for a citation of another patent document (NPL)
 in a patent application.
 """
 abstract type AbstractPatentCitation <: AbstractCitation end
 
 """
-AbstractNPLCitation
-
 An abstract type representing an interface for a citation of non-patent literature (NPL) in
 a patent application.
 """

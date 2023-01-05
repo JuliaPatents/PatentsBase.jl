@@ -1,6 +1,6 @@
 name = "PatentsBase"
 uuid = "b32246e4-6301-4a4b-8d75-0b3972dc1401"
-authors = ["Jakob Hoffmann <jfb-hoffmann@hotmail.de> and contributors"]
+authors = ["Jakob Hoffmann <jfb-hoffmann@hotmail.de>, Alex Seitz <alex.seitz1@gmx.net>"]
 version = "1.0.1"
 
 [deps]
@@ -8,8 +8,7 @@ Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 StructTypes = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
 
 [compat]
-StructTypes = "1"
-julia = "1.6"
+julia = "^1"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

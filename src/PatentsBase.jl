@@ -72,22 +72,4 @@ include("citations.jl")
 include("parties.jl")
 include("portfolios.jl")
 
-# Trait-based interface to indicate available information at data source level?
-
-# abstract type AbstractDataSource end
-
-# struct LensData end <: AbstractDataSource
-# struct LensApplication <: AbstractApplication end
-
-# struct HasApplicants end
-# struct NoApplicants end
-
-# datasource(::LensApplication) = LensData()
-# hasapplicants(::LensData) = HasApplicants()
-
-# applicants(::HasApplicants, a::AbstractApplication) = a.applicants
-# applicants(::NoApplicants, a::AbstractApplication) = error("$(typeof(a)) does not contain applicant information.")
-
-# applicants(a::AbstractApplication) = applicants(hasapplicants(datasource(a)), a)
-
 end

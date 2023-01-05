@@ -1,9 +1,6 @@
 
 """
-    AbstractFamily
-
 An abstract type representing an interface for a patent family.
-Concrete implementations, such as `PatentsLens.LensFamily`, should subtype this.
 """
 abstract type AbstractFamily end
 

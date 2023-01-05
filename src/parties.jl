@@ -1,7 +1,5 @@
 
 """
-    AbstractParty
-
 An abstract type representing an interface for a patent application party.
 The two types of parties are applicants and inventors, represented by the types
 `AbstractApplicant` and `AbstractInventor`, respectively.
@@ -10,18 +8,12 @@ The two types of parties are applicants and inventors, represented by the types
 abstract type AbstractParty end
 
 """
-    AbstractInventor
-
 An abstract type representing an interface for an inventor.
-Concrete implementations, such as `PatentsLens.LensInventor`, should subtype this.
 """
 abstract type AbstractInventor <: AbstractParty end
 
 """
-    AbstractApplicant
-
 An abstract type representing an interface for a patent applicant.
-Concrete implementations, such as `PatentsLens.LensApplicant`, should subtype this.
 """
 abstract type AbstractApplicant <: AbstractParty end
 
