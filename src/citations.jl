@@ -1,22 +1,16 @@
 
 """
-    AbstractCitation
-
 An abstract type representing an interface for a citation in a patent application.
 """
 abstract type AbstractCitation end
 
 """
-    AbstractPatentCitation
-
 An abstract type representing an interface for a citation of another patent document (NPL)
 in a patent application.
 """
 abstract type AbstractPatentCitation <: AbstractCitation end
 
 """
-AbstractNPLCitation
-
 An abstract type representing an interface for a citation of non-patent literature (NPL) in
 a patent application.
 """
@@ -139,12 +133,19 @@ to cite a patent application or patent family.
 Note that even though these are represented by the AbstractPatentCitation interface, they
 are conceptually not citations in a strict sense.
 """
-function citedby end
+function forwardcitations end
 
-function citedby(a::AbstractApplication)::Vector{<:AbstractPatentCitation}
+function forwardcitations(a::AbstractApplication)::Vector{<:AbstractPatentCitation}
     throw(ArgumentError("$(typeof(a)) does not contain forward citation information."))
 end
 
-function citedby(f::AbstractFamily)::Vector{<:AbstractPatentCitation}
-    reduce(vcat, citedby.(applications(f)))
+function forwardcitations(f::AbstractFamily)::Vector{<:AbstractPatentCitation}
+    unique(reduce(vcat, forwardcitations.(applications(f))))
 end
+
+"""
+    citationgraph(families::Vector{<:AbstractFamily})
+
+Compute the graph created by family-to-family citations from `families`.
+"""
+function citationgraph end

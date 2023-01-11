@@ -1,6 +1,4 @@
 """
-    AbstractClassificationSystem
-
 Abstract type representing a system for technology classification of patents, such as the
 Cooperative Patent Classification (CPC).
 """
@@ -11,8 +9,6 @@ struct CPC <: IPCLikeSystem end
 struct IPC <: IPCLikeSystem end
 
 """
-    AbstractClassificationSymbol
-
 Abstract type representing a patent classification entry.
 Specific implementations should at least implement `symbol(c::AbstractClassificationSymbol)`
 and, if possible, also `title`.
@@ -21,8 +17,6 @@ abstract type AbstractClassificationSymbol end
 abstract type IPCLikeSymbol <: AbstractClassificationSymbol end
 
 """
-    CPCSymbol
-
 Struct representing a minimal technology classification entry according to the CPC.
 """
 struct CPCSymbol <: IPCLikeSymbol
@@ -31,8 +25,6 @@ end
 StructTypes.StructType(::Type{CPCSymbol}) = StructTypes.Struct()
 
 """
-    IPCSymbol
-
 Struct representing a minimal technology classification entry according to the IPC.
 """
 struct IPCSymbol <: IPCLikeSymbol
@@ -41,17 +33,28 @@ end
 StructTypes.StructType(::Type{IPCSymbol}) = StructTypes.Struct()
 
 """
-    AbstractClassificationLevel
-
 Abstract type representing a level in a hierarchical technology classification system.
 """
 abstract type AbstractClassificationLevel end
+
+"""
+Abstract type representing a level in an IPC-like technology classification system.
+"""
 abstract type AbstractIPCLikeClassificationLevel <: AbstractClassificationLevel end
 
+"""Dispatch type referring to the section level of an IPC-like technology classification."""
 struct Section <: AbstractIPCLikeClassificationLevel end
+
+"""Dispatch type referring to the class level of an IPC-like technology classification."""
 struct Class <: AbstractIPCLikeClassificationLevel end
+
+"""Dispatch type referring to the subclass level of an IPC-like technology classification."""
 struct Subclass <: AbstractIPCLikeClassificationLevel end
+
+"""Dispatch type referring to the group level of an IPC-like technology classification."""
 struct Maingroup <: AbstractIPCLikeClassificationLevel end
+
+"""Dispatch type referring to the subgroup level of an IPC-like technology classification."""
 struct Subgroup <: AbstractIPCLikeClassificationLevel end
 
 """

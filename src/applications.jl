@@ -1,9 +1,6 @@
 
 """
-    AbstractApplication
-
-An abstract type representing an interface for a patent application. Concrete
-implementations, such as `PatentsLens.LensApplication`, should subtype this.
+An abstract type representing an interface for a patent application.
 
 `PatentsLens.jl` includes a general interface for working with different types of patent
 data, which should also be implemented by the concrete subtypes, as permitted by the
@@ -12,8 +9,6 @@ respective data source.
 abstract type AbstractApplication end
 
 """
-    AbstractApplicationReference
-
 An abstract type representing a reference to a patent application. Implementations
 should be coupled with an implementation of `AbstractDataSource` to allow lookup
 of the referenced application in the data source, using the `find_application` function.
@@ -21,8 +16,6 @@ of the referenced application in the data source, using the `find_application` f
 abstract type AbstractApplicationReference end
 
 """
-    AbstractApplicationID
-
 An abstract type representing an interface for an application reference by
 jurisdiction, document number, and (optionally) kind. This is the preferred
 reference type to allow cross-referencing of applications across different
@@ -76,6 +69,24 @@ end
 
 function kind(a::AbstractApplication)::String
     throw(ArgumentError("$(typeof(a)) does not contain kind information"))
+end
+
+"""
+    id(a::AbstractApplication)
+    id(a::AbstractApplicationID)
+
+Return a `String` with the original application ID, consisting of country code, document number and kind identifier.
+"""
+id(a::Union{AbstractApplication, AbstractApplicationID}) = jurisdiction(a) * doc_number(a) * kind(a)
+
+"""
+    sourceid(a::AbstractApplication)
+    sourceid(a::AbstractApplicationID)
+
+Return the id used in the data source, e.g. the lens_id for data obtained from Lens.org.
+"""
+function sourceid(a::Union{AbstractApplication, AbstractApplicationID})
+    throw(ArgumentError("$(typeof(a)) does not contain a sourceid. Use `id(a)` instead."))
 end
 
 """

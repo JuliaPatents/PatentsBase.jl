@@ -6,7 +6,15 @@ Filters are composable using the `UnionFilter` and `IntersectionFilter` structs 
 """
 abstract type AbstractFilter end
 
-"Struct representing the intersection or conjunction of two `AbstractFilter`s."
+"""
+    IntersectionFilter(a::AbstractFilter, b::AbstractFilter)
+
+Struct representing the intersection or conjunction of two `AbstractFilter`s.
+As a shorthand syntax for this composition, the '&' operator may be used:
+
+    filter3 = filter1 & filter2 # intersection of filter1 and filter2
+
+"""
 struct IntersectionFilter <: AbstractFilter
     a::AbstractFilter
     b::AbstractFilter
@@ -14,7 +22,15 @@ end
 
 Base.:&(a::AbstractFilter, b::AbstractFilter) = IntersectionFilter(a, b)
 
-"Struct representing the union or disjunction of two `AbstractFilter`s."
+"""
+    UnionFilter(a::AbstractFilter, b::AbstractFilter)
+
+Struct representing the union or disjunction of two `AbstractFilter`s.
+As a shorthand syntax for this composition, the '|' operator may be used:
+
+    filter3 = filter1 | filter2 # union of filter1 and filter2
+
+"""
 struct UnionFilter <: AbstractFilter
     a::AbstractFilter
     b::AbstractFilter

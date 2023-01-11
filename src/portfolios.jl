@@ -1,9 +1,6 @@
 
 """
-    AbstractPortfolio
-
 An abstract type representing an interface for an entity's patent portfolio.
-Concrete implementations, such as `PatentsLens.LensPortfolio`, should subtype this.
 """
 abstract type AbstractPortfolio end
 

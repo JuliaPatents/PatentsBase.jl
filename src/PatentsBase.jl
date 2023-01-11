@@ -24,10 +24,10 @@ export AbstractDataSource, AbstractApplicationReference, AbstractApplicationID
 ### Interface functions
 
 # parties
-export applicants, inventors, name, names, referencename
+export applicants, inventors, name, names
 
 # document identifiers and base information
-export jurisdiction, doc_number, kind
+export sourceid, id, jurisdiction, doc_number, kind
 
 # content
 export title, description, claims, fulltext, text
@@ -58,7 +58,7 @@ export AbstractFilter, ClassificationFilter, ContentFilter, UnionFilter, Interse
 export SearchableContentField, TitleSearch, AbstractSearch, ClaimsSearch, FulltextSearch
 
 # computations
-export aggregate_families, citationgraph, cooccurrence
+export aggregate_families, citationgraph
 
 ### Interface definitions
 
@@ -71,23 +71,5 @@ include("classifications.jl")
 include("citations.jl")
 include("parties.jl")
 include("portfolios.jl")
-
-# Trait-based interface to indicate available information at data source level?
-
-# abstract type AbstractDataSource end
-
-# struct LensData end <: AbstractDataSource
-# struct LensApplication <: AbstractApplication end
-
-# struct HasApplicants end
-# struct NoApplicants end
-
-# datasource(::LensApplication) = LensData()
-# hasapplicants(::LensData) = HasApplicants()
-
-# applicants(::HasApplicants, a::AbstractApplication) = a.applicants
-# applicants(::NoApplicants, a::AbstractApplication) = error("$(typeof(a)) does not contain applicant information.")
-
-# applicants(a::AbstractApplication) = applicants(hasapplicants(datasource(a)), a)
 
 end

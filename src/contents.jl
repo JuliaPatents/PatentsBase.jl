@@ -1,6 +1,4 @@
 """
-    AbstractContent
-
 An abstract type representing an interface for content fields of a patent application.
 There are five abstract content fields that are subtypes of this type:
 `AbstractTitle`, `AbstractDescription`, `AbstractClaim`, `AbstractClaims`,
@@ -9,52 +7,44 @@ There are five abstract content fields that are subtypes of this type:
 abstract type AbstractContent end
 
 """
-    AbstractTitle
-
 An abstract type representing an interface for the title(s) of a patent application.
-Concrete implementations, such as `PatentsLens.LensTitle`, should subtype this.
 """
 abstract type AbstractTitle <: AbstractContent end
 
 """
-    AbstractDescription
-
 An abstract type representing an interface for the abstract or short description of a patent.
 The type is deliberately not named "AbstractAbstract" to avoid confusion.
-Concrete implementations, such as `PatentsLens.LensAbstract`, should subtype this.
 """
 abstract type AbstractDescription  <: AbstractContent end
 
 """
-    AbstractClaim
-
 An abstract type representing an interface for a single claim associated with a patent application.
-Concrete implementations, such as `PatentsLens.LensClaim`, should subtype this.
 """
 abstract type AbstractClaim  <: AbstractContent end
 
 """
-    AbstractClaims
-
 An abstract type representing an interface for the claims associated with a patent application.
-Concrete implementations, such as `PatentsLens.LensClaims`, should subtype this.
 """
 abstract type AbstractClaims  <: AbstractContent end
 
 """
-    AbstractFulltext
-
 An abstract type representing an interface for the full text of a patent application.
-Concrete implementations, such as `PatentsLens.LensFulltext`, should subtype this.
 """
 abstract type AbstractFulltext  <: AbstractContent end
 
 "Abstract type representing a fulltext-searchable application content field."
 abstract type SearchableContentField end
 
+"Dispatch type referring to a search in the titles of documents."
 struct TitleSearch <: SearchableContentField end
+
+"Dispatch type referring to a search in the abstract descriptions of documents."
 struct AbstractSearch <: SearchableContentField end
+
+"Dispatch type referring to a search in the claims section of documents."
 struct ClaimsSearch <: SearchableContentField end
+
+"Dispatch type referring to a search in the full text of documents."
 struct FulltextSearch <: SearchableContentField end
 
 """
@@ -134,10 +124,28 @@ function title(a::AbstractApplication, lang::String)::String
 end
 
 """
-    all(c::AbstractClaims)
+    claims(a::AbstractApplication)
 
-Returns a `Vector{<:AbstractClaim}` with the individual claims of the claims field `c`.
+return information on patent claims contained in application `a`.
 """
-function all(c::AbstractClaims)::Vector{<:AbstractClaim}
-    throw(ArgumentError("$(typeof(c)) does not allow retrieval of individual claims."))
+function claims(a::AbstractApplication)
+    throw(ArgumentError("$(typeof(a)) does not contain claims information."))
+end
+
+"""
+    description(a::AbstractApplication)
+
+return the description (or abstract) for application a.
+"""
+function description(a::AbstractApplication)
+    throw(ArgumentError("$(typeof(a)) does not contain a description."))
+end
+
+"""
+    fulltext(a::AbstractApplication)
+
+return the fulltext for application a.
+"""
+function fulltext(a::AbstractApplication)
+    throw(ArgumentError("$(typeof(a)) does not contain fulltext information."))
 end

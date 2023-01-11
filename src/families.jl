@@ -1,9 +1,6 @@
 
 """
-    AbstractFamily
-
 An abstract type representing an interface for a patent family.
-Concrete implementations, such as `PatentsLens.LensFamily`, should subtype this.
 """
 abstract type AbstractFamily end
 
@@ -53,3 +50,11 @@ function families(ds::AbstractDataSource, filter::AbstractFilter = AllFilter();
 
     throw(ArgumentError("$(typeof(ds)) does not allow retrieval of all families"))
 end
+
+
+"""
+    aggregate_families(apps::Vector{<:AbstractApplication})
+
+Aggregate the applications `apps` into an array of patent families.
+"""
+function aggregate_families end
