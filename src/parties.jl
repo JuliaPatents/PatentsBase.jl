@@ -37,12 +37,12 @@ end
 name(a::AbstractApplicant) = first(names(a))
 
 """
-    names(a::AbstractApplicant)
+    names(a::AbstractParty)
 
-return a `Vector{String}` of all names under which applicant `a` is known to appear.
+return a `Vector{String}` of all names under which party `p` is known to appear.
 """
-function names(a::AbstractApplicant)::Vector{String}
-    throw(ArgumentError("$(typeof(a)) does not contain name information."))
+function names(p::AbstractParty)::Vector{String}
+    throw(ArgumentError("$(typeof(p)) does not contain name information."))
 end
 
 """
@@ -70,5 +70,24 @@ return a `Vector{<:AbstractApplicant}` with the unique set of applicants from al
 applications in family `f`.
 """
 function applicants(f::AbstractFamily)::Vector{<:AbstractApplicant}
-    reduce(vcat, applicants.(applications(f)))
+    unique(reduce(vcat, applicants.(applications(f))))
+end
+
+"""
+    inventors(a::AbstractApplication)
+
+return a `Vector{<:AbstractInventor}` with information about the inventor(s) of application `a`.
+"""
+function inventors(a::AbstractApplication)::Vector{<:AbstractInventor}
+    throw(ArgumentError("$(typeof(a)) does not contain inventor information."))
+end
+
+"""
+    inventors(f::AbstractFamily)
+
+return a `Vector{<:AbstractInventor}` with the unique set of inventors from all the
+applications in family `f`.
+"""
+function inventors(f::AbstractFamily)::Vector{<:AbstractInventor}
+    unique(reduce(vcat, applicants.(applications(f))))
 end
