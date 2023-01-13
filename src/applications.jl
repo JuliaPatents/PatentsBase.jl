@@ -1,10 +1,6 @@
 
 """
 An abstract type representing an interface for a patent application.
-
-`PatentsLens.jl` includes a general interface for working with different types of patent
-data, which should also be implemented by the concrete subtypes, as permitted by the
-respective data source.
 """
 abstract type AbstractApplication end
 
@@ -77,7 +73,10 @@ end
 
 Return a `String` with the original application ID, consisting of country code, document number and kind identifier.
 """
-id(a::Union{AbstractApplication, AbstractApplicationID}) = jurisdiction(a) * doc_number(a) * kind(a)
+function id end
+
+id(a::AbstractApplication) = jurisdiction(a) * doc_number(a) * kind(a)
+id(a::AbstractApplicationID) = jurisdiction(a) * doc_number(a) * kind(a)
 
 """
     sourceid(a::AbstractApplication)
@@ -95,6 +94,11 @@ end
 Return `true` if `app` is the application referenced by `ref`, and false otherwise.
 In cases where identity cannot be checked due to incompatible types, implementations should
 default to `false`. The abstract reference implementation always returns `false`.
+
+*Implementation advice:* There is no need to implement this for every possible combination
+of application and reference type. Usually, it will be enough to provide implementations for
+the application and reference types used by the same implementation package, and a generic
+implementation for `AbstractApplicationID` references.
 """
 function refers_to(ref::AbstractApplicationReference, app::AbstractApplication)::Bool
     return false
@@ -111,8 +115,7 @@ function refers_to(ref::AbstractApplicationID, app::AbstractApplication)
 end
 
 """
-    applications(ds::AbstractDataSource, kwargs...)
-    applications(ds::AbstractDataSource, filter::AbstractFilter, kwargs...)
+    applications(ds::AbstractDataSource[, filter::AbstractFilter], kwargs...)
 
 Return a `Vector{<:AbstractApplication}` with all applications contained in `ds`.
 May take a long time and/or cause memory overflow for large out-of-memory data sources.

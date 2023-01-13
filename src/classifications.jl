@@ -1,11 +1,23 @@
 """
-Abstract type representing a system for technology classification of patents, such as the
-Cooperative Patent Classification (CPC).
+Abstract type representing a system for technology classification of patents.
 """
 abstract type AbstractClassificationSystem end
+
+"""
+Abstract type representing a system for technology classification of patents that follows a
+structure similar to that of the International Patent Classification (IPC) or
+Cooperative Patent Classification (CPC).
+"""
 abstract type IPCLikeSystem <: AbstractClassificationSystem end
 
+"""
+Dispatch type referring to the Cooperative Patent Classification (CPC) classification system.
+"""
 struct CPC <: IPCLikeSystem end
+
+"""
+Dispatch type referring to the International Patent Classification (IPC) classification system.
+"""
 struct IPC <: IPCLikeSystem end
 
 """
@@ -14,6 +26,12 @@ Specific implementations should at least implement `symbol(c::AbstractClassifica
 and, if possible, also `title`.
 """
 abstract type AbstractClassificationSymbol end
+
+"""
+Abstract type representing a patent classification entry following an `IPCLikeSystem`.
+In addition to the interface for any `AbstractClassificationSymbol`, implementations should
+implement `symbol(level, c)` for all levels of the classification.
+"""
 abstract type IPCLikeSymbol <: AbstractClassificationSymbol end
 
 """
@@ -59,9 +77,12 @@ struct Subgroup <: AbstractIPCLikeClassificationLevel end
 
 """
 Struct representing a database filter by IPC-like classification.
-* `system`: The classification system used. Can be either `IPC()` or `CPC()`.
-* `level`: The `AbstractIPCLikeClassificationLevel` at which to filter (`Section()`, `Class()`, `Subclass()` etc.)
-* `symbols`: A `Vector{IPCLikeSymbol}` of all classifications included. The filter will match any application classified by at least one of these.
+
+Parameters:
+
+* `system::IPCLikeSystem`: The classification system used. Can be either `IPC()` or `CPC()`.
+* `level::AbstractIPCLikeClassificationLevel`: The level at which to filter (`Section()`, `Class()`, `Subclass()` etc.)
+* `symbols::Vector{<:IPCLikeSymbol}`: An array of all classifications included. The filter will match any application classified by at least one of these.
 """
 struct ClassificationFilter <: AbstractFilter
     system::IPCLikeSystem

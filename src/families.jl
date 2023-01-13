@@ -34,8 +34,7 @@ function siblings(a::AbstractApplication, ds::AbstractDataSource)::Vector{<:Abst
 end
 
 """
-    families(ds::AbstractDataSource, kwargs...)
-    families(ds::AbstractDataSource, filter::AbstractFilter, kwargs...)
+    families(ds::AbstractDataSource[, filter::AbstractFilter], kwargs...)
 
 Return a `Vector{<:AbstractFamily}` with all patent families contained in `ds`.
 May take a long time and/or cause memory overflow for large out-of-memory data sources.

@@ -48,8 +48,8 @@ struct ClaimsSearch <: SearchableContentField end
 struct FulltextSearch <: SearchableContentField end
 
 """
-    ContentFilter(search_query::String, field::SearchableContentField, [languages::Vector{String}])
-    ContentFilter(search_query::String, fields::Vector{<:SearchableContentField}, [languages::Vector{String}])
+    ContentFilter(search_query::String, field::SearchableContentField[, languages::Vector{String}])
+    ContentFilter(search_query::String, fields::Vector{<:SearchableContentField}[, languages::Vector{String}])
 
 Struct representing a database filter using full-text search on various content fields.
 

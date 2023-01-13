@@ -3,7 +3,12 @@ using Documenter, PatentsBase
 makedocs(
     modules = [PatentsBase],
     sitename = "PatentsBase.jl",
-    format = Documenter.HTML(; prettyurls = get(ENV, "CI", nothing) == "true")
+    format = Documenter.HTML(; prettyurls = get(ENV, "CI", nothing) == "true"),
+    pages = [
+        "Home" => "index.md",
+        "User Guide" => "guide.md",
+        "Interface Reference" => "ref.md"
+    ]
 )
 
 deploydocs(
