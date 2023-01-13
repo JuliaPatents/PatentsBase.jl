@@ -60,6 +60,9 @@ export SearchableContentField, TitleSearch, AbstractSearch, ClaimsSearch, Fullte
 # computations
 export aggregate_families, citationgraph
 
+### documentation templates
+include("docs/templates.jl")
+
 ### Interface definitions
 
 include("datasources.jl")
