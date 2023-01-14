@@ -1,8 +1,8 @@
 """
 An abstract type representing an interface for content fields of a patent application.
 There are five abstract content fields that are subtypes of this type:
-`AbstractTitle`, `AbstractDescription`, `AbstractClaim`, `AbstractClaims`,
-`AbstractFulltext`.
+[`AbstractTitle`](@ref), [`AbstractDescription`](@ref), [`AbstractClaim`](@ref),
+[`AbstractClaims`](@ref), and [`AbstractFulltext`](@ref).
 """
 abstract type AbstractContent end
 
@@ -48,8 +48,11 @@ struct ClaimsSearch <: SearchableContentField end
 struct FulltextSearch <: SearchableContentField end
 
 """
-    ContentFilter(search_query::String, field::SearchableContentField[, languages::Vector{String}])
-    ContentFilter(search_query::String, fields::Vector{<:SearchableContentField}[, languages::Vector{String}])
+    ContentFilter(
+        search_query::String,
+        field::Union{SearchableContentField, Vector{<:SearchableContentField},
+        [languages::Vector{String}]
+    )
 
 Struct representing a database filter using full-text search on various content fields.
 
@@ -59,13 +62,12 @@ Parameters:
     Query syntax may vary across data sources, but should be broadly similar to
     https://www.sqlite.org/fts5.html#full_text_query_syntax.
 
-* `field` / `fields`: Specifies which `SearchableContentField`(s) is/are used for the search.
-    Possible values are `TitleSearch()`, `AbstractSearch()`, `ClaimsSearch()`, or `FulltextSearch()`.
-    A vector can be passed, in which case the constructor actually creates a `UnionFilter`.
+* `field`: Specifies which [`SearchableContentField`](@ref)(s) is/are used for the search.
+    Possible values are [`TitleSearch`](@ref)`()`, [`AbstractSearch`](@ref)`()`, [`ClaimsSearch`](@ref)`()`, or [`FulltextSearch`](@ref)`()`.
+    A vector can be passed, in which case the constructor actually creates a [`UnionFilter`](@ref).
 
-* `languages` (optional): A vector of two-character language codes specifying the languages for which matches are included.
+* `languages`: Optional. A vector of two-character language codes specifying the languages for which matches are included.
     If an empty vector is passed (as by default), all available languages are included.
-
 """
 Base.@kwdef struct ContentFilter <: AbstractFilter
     search_query::String
@@ -77,12 +79,12 @@ function ContentFilter(search_query::String, field::SearchableContentField)
     ContentFilter(search_query, field, Vector{String}())
 end
 
-function ContentFilter(search_query::String, fields::Vector{<:SearchableContentField}, languages::Vector{String})
-    foldl(|, (f -> ContentFilter(search_query, f, languages)).(fields))
+function ContentFilter(search_query::String, field::Vector{<:SearchableContentField}, languages::Vector{String})
+    foldl(|, (f -> ContentFilter(search_query, f, languages)).(field))
 end
 
-function ContentFilter(search_query::String, fields::Vector{<:SearchableContentField})
-    foldl(|, (f -> ContentFilter(search_query, f)).(fields))
+function ContentFilter(search_query::String, field::Vector{<:SearchableContentField})
+    foldl(|, (f -> ContentFilter(search_query, f)).(field))
 end
 
 """
@@ -108,7 +110,7 @@ end
 """
     title(a::AbstractApplication)
 
-return a `AbstractTitle` with information about the title of application `a`.
+Return an [`AbstractTitle`](@ref) with information about the title of application `a`.
 """
 function title(a::AbstractApplication)::(<:AbstractTitle)
     throw(ArgumentError("$(typeof(a)) does not contain title information."))
@@ -117,7 +119,7 @@ end
 """
     title(a::AbstractApplication, lang::String)
 
-return a `String` with the localized title of application `a` for language `lang`.
+Return a `String` with the localized title of application `a` for language `lang`.
 """
 function title(a::AbstractApplication, lang::String)::String
     text(title(a), lang)
@@ -126,26 +128,26 @@ end
 """
     claims(a::AbstractApplication)
 
-return information on patent claims contained in application `a`.
+Return an [`AbstractClaims`](@ref) with information on patent claims contained in application `a`.
 """
-function claims(a::AbstractApplication)
+function claims(a::AbstractApplication)::(<:AbstractClaims)
     throw(ArgumentError("$(typeof(a)) does not contain claims information."))
 end
 
 """
     description(a::AbstractApplication)
 
-return the description (or abstract) for application a.
+Return an [`AbstractDescription`](@ref) with the abstract of application a.
 """
-function description(a::AbstractApplication)
+function description(a::AbstractApplication)::(<:AbstractDescription)
     throw(ArgumentError("$(typeof(a)) does not contain a description."))
 end
 
 """
     fulltext(a::AbstractApplication)
 
-return the fulltext for application a.
+Return an [`AbstractFulltext`](@ref) with the full text of application a.
 """
-function fulltext(a::AbstractApplication)
+function fulltext(a::AbstractApplication)::(<:AbstractFulltext)
     throw(ArgumentError("$(typeof(a)) does not contain fulltext information."))
 end

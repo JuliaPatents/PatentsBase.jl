@@ -2,8 +2,7 @@
 """
 An abstract type representing an interface for a patent application party.
 The two types of parties are applicants and inventors, represented by the types
-`AbstractApplicant` and `AbstractInventor`, respectively.
-
+[`AbstractApplicant`](@ref) and [`AbstractInventor`](@ref), respectively.
 """
 abstract type AbstractParty end
 
@@ -49,7 +48,7 @@ end
 """
     applicants(a::AbstractApplication)
 
-return a `Vector{<:AbstractApplicant}` with information about the applicant(s) of application `a`.
+return a `Vector{<:`[`AbstractApplicant`](@ref)`}` with information about the applicant(s) of application `a`.
 """
 function applicants(a::AbstractApplication)::Vector{<:AbstractApplicant}
     throw(ArgumentError("$(typeof(a)) does not contain applicant information."))
@@ -58,7 +57,7 @@ end
 """
     applicants(f::AbstractFamily)
 
-return a `Vector{<:AbstractApplicant}` with the unique set of applicants from all the
+return a `Vector{<:`[`AbstractApplicant`](@ref)`}` with the unique set of applicants from all the
 applications in family `f`.
 """
 function applicants(f::AbstractFamily)::Vector{<:AbstractApplicant}
@@ -68,7 +67,7 @@ end
 """
     inventors(a::AbstractApplication)
 
-return a `Vector{<:AbstractInventor}` with information about the inventor(s) of application `a`.
+return a `Vector{<:`[`AbstractInventor`](@ref)`}` with information about the inventor(s) of application `a`.
 """
 function inventors(a::AbstractApplication)::Vector{<:AbstractInventor}
     throw(ArgumentError("$(typeof(a)) does not contain inventor information."))
@@ -77,7 +76,7 @@ end
 """
     inventors(f::AbstractFamily)
 
-return a `Vector{<:AbstractInventor}` with the unique set of inventors from all the
+return a `Vector{<:`[`AbstractInventor`](@ref)`}` with the unique set of inventors from all the
 applications in family `f`.
 """
 function inventors(f::AbstractFamily)::Vector{<:AbstractInventor}

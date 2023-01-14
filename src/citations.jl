@@ -29,7 +29,7 @@ end
 """
     reference(c::AbstractPatentCitation)
 
-Return an `AbstractApplicationReference` for the application cited in `c`.
+Return an [`AbstractApplicationReference`](@ref) for the application cited in `c`.
 """
 function reference(c::AbstractPatentCitation)::(<:AbstractApplicationReference)
     throw(ArgumentError("$(typeof(c)) cannot be converted to ApplicationReference"))
@@ -79,7 +79,7 @@ end
     citations(a::AbstractApplication)
     citations(f::AbstractFamily)
 
-Return a `Vector{<:AbstractCitation}` with all citations from a patent application or family.
+Return a `Vector{<:`[`AbstractCitation`](@ref)`}` with all citations from a patent application or family.
 """
 function citations end
 
@@ -95,7 +95,7 @@ end
     patent_citations(a::AbstractApplication)
     patent_citations(f::AbstractFamily)
 
-Return a `Vector{<:AbstractCitation}` with all patent citations from a patent application
+Return a vector `Vector{<:`[`AbstractPatentCitation`](@ref)`}` with all patent citations from a patent application
 or family.
 """
 function patent_citations end
@@ -111,7 +111,7 @@ end
 """
     npl_citations(a::AbstractApplication)
 
-Return a `Vector{<:AbstractNPLCitation}` with all NPL citations from a patent application
+Return a `Vector{<:`[`AbstractNPLCitation`](@ref)`}` with all NPL citations from a patent application
 or family.
 """
 function npl_citations end
@@ -128,9 +128,9 @@ end
     citedby(a::AbstractApplication)
     citedby(f::AbstractFamily)
 
-Return a `Vector{<:AbstractPatentCitation}` with citations of all patent applications known
+Return a `Vector{<:`[`AbstractPatentCitation`](@ref)`}` with citations of all patent applications known
 to cite a patent application or patent family.
-Note that even though these are represented by the AbstractPatentCitation interface, they
+Note that even though these are represented by the [`AbstractPatentCitation`](@ref) interface, they
 are conceptually not citations in a strict sense.
 """
 function forwardcitations end

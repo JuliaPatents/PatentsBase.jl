@@ -22,19 +22,20 @@ struct IPC <: IPCLikeSystem end
 
 """
 Abstract type representing a patent classification entry.
-Specific implementations should at least implement `symbol(c::AbstractClassificationSymbol)`
-and, if possible, also `title`.
+Specific implementations should at least implement [`symbol`](@ref).
 """
 abstract type AbstractClassificationSymbol end
 
 """
-Abstract type representing a patent classification entry following an `IPCLikeSystem`.
-In addition to the interface for any `AbstractClassificationSymbol`, implementations should
-implement `symbol(level, c)` for all levels of the classification.
+Abstract type representing a patent classification entry following an [`IPCLikeSystem`](@ref).
+In addition to the interface for any [`AbstractClassificationSymbol`](@ref), implementations should
+implement [`symbol(l, c)`](@ref) and [`title(l, c)`](#PatentsBase.title-Tuple{AbstractClassificationLevel,%20AbstractClassificationSymbol}) for all levels of the classification.
 """
 abstract type IPCLikeSymbol <: AbstractClassificationSymbol end
 
 """
+    CPCSymbol(symbol::String)
+
 Struct representing a minimal technology classification entry according to the CPC.
 """
 struct CPCSymbol <: IPCLikeSymbol
@@ -43,6 +44,8 @@ end
 StructTypes.StructType(::Type{CPCSymbol}) = StructTypes.Struct()
 
 """
+    IPCSymbol(symbol::String)
+
 Struct representing a minimal technology classification entry according to the IPC.
 """
 struct IPCSymbol <: IPCLikeSymbol
@@ -76,13 +79,19 @@ struct Maingroup <: AbstractIPCLikeClassificationLevel end
 struct Subgroup <: AbstractIPCLikeClassificationLevel end
 
 """
+    ClassificationFilter(
+        system::IPCLikeSystem,
+        level::AbstractIPCLikeClassificationLevel,
+        symbols::Vector{<:IPCLikeSymbol}
+    )
+
 Struct representing a database filter by IPC-like classification.
 
 Parameters:
 
-* `system::IPCLikeSystem`: The classification system used. Can be either `IPC()` or `CPC()`.
-* `level::AbstractIPCLikeClassificationLevel`: The level at which to filter (`Section()`, `Class()`, `Subclass()` etc.)
-* `symbols::Vector{<:IPCLikeSymbol}`: An array of all classifications included. The filter will match any application classified by at least one of these.
+* `system`: The [`IPCLikeSystem`](@ref) system used, such as  [`IPC`](@ref) or [`CPC`](@ref).
+* `level`: The [`AbstractIPCLikeClassificationLevel`](@ref) at which to filter ([`Section`](@ref), [`Class`](@ref), [`Subclass`](@ref) etc.)
+* `symbols`: A `Vector{<:`[`IPCLikeSymbol`](@ref)`}` of all classifications included. The filter will match any application classified by at least one of these.
 """
 struct ClassificationFilter <: AbstractFilter
     system::IPCLikeSystem
@@ -96,7 +105,7 @@ end
     classification(c::AbstractClassificationSystem, a::AbstractApplication)
     classification(c::AbstractClassificationSystem, f::AbstractFamily)
 
-Obtain a vector of technology classification entries for application `a` or family `f`
+Obtain a `Vector{<:`[`AbstractClassificationSymbol`](@ref)`}` with all classifications for application `a` or family `f`
 according to classification system `c`. Defaults to CPC if no system is specified.
 """
 function classification end
@@ -120,7 +129,7 @@ classification(f::AbstractFamily) = classification(CPC(), f)
 
 """
     symbol(c::AbstractClassificationSymbol)
-    symbol(::AbstractClassificationLevel, c::AbstractClassificationSymbol)
+    symbol(l::AbstractClassificationLevel, c::AbstractClassificationSymbol)
 
 Return a `String` representation of a classification symbol `c` down to a specified level `l`.
 If no level is specified, the complete symbol is returned.
@@ -132,18 +141,18 @@ function symbol(c::AbstractClassificationSymbol)
 end
 
 symbol(c::IPCLikeSymbol) = c.symbol
-symbol(::Section, c::IPCLikeSymbol) = first(symbol(c), 1)
-symbol(::Class, c::IPCLikeSymbol) = first(symbol(c), 3)
-symbol(::Subclass, c::IPCLikeSymbol) = first(symbol(c), 4)
-symbol(::Maingroup, c::IPCLikeSymbol) = first(split(symbol(c), "/"))
-symbol(::Subgroup, c::IPCLikeSymbol) = symbol(c)
+symbol(l::Section, c::IPCLikeSymbol) = first(symbol(c), 1)
+symbol(l::Class, c::IPCLikeSymbol) = first(symbol(c), 3)
+symbol(l::Subclass, c::IPCLikeSymbol) = first(symbol(c), 4)
+symbol(l::Maingroup, c::IPCLikeSymbol) = first(split(symbol(c), "/"))
+symbol(l::Subgroup, c::IPCLikeSymbol) = symbol(c)
 
 """
-    title(::AbstractClassificationLevel, c::AbstractClassificationSymbol)
+    title(l::AbstractClassificationLevel, c::AbstractClassificationSymbol)
 
 Return a `String` containing the full title of a classification `c` down to a specified
 level `l`.
 """
-function title(::AbstractClassificationLevel, c::AbstractClassificationSymbol)
+function title(l::AbstractClassificationLevel, c::AbstractClassificationSymbol)
     throw(ArgumentError("No title information available for $(typeof(c))"))
 end

@@ -7,7 +7,7 @@ abstract type AbstractFamily end
 """
     applications(f::AbstractFamily)
 
-return a `Vector{<:AbstractApplication}` with all applications in family `f`.
+return a `Vector{<:`[`AbstractApplication`](@ref)`}` with all applications in family `f`.
 """
 function applications(f::AbstractFamily)::Vector{<:AbstractApplication}
     throw(ArgumentError("$(typeof(f)) does not allow retrieval of individual applications."))
@@ -16,7 +16,7 @@ end
 """
     siblings(a::AbstractApplication)
 
-return a `Vector{<:AbstractApplicationReference}` with references to all applications that
+return a `Vector{<:`[`AbstractApplication`](@ref)`}` with references to all applications that
 are in the same family as `a`.
 """
 function siblings(a::AbstractApplication)::Vector{<:AbstractApplicationReference}
@@ -26,7 +26,7 @@ end
 """
     siblings(a::AbstractApplication, ds::AbstractDataSource)
 
-return a `Vector{<:AbstractApplication}` with all applications from the data source `ds`
+return a `Vector{<:`[`AbstractApplication`](@ref)`}` with all applications from the data source `ds`
 that are in the same family as `a`.
 """
 function siblings(a::AbstractApplication, ds::AbstractDataSource)::Vector{<:AbstractApplication}
@@ -36,7 +36,7 @@ end
 """
     families(ds::AbstractDataSource[, filter::AbstractFilter], kwargs...)
 
-Return a `Vector{<:AbstractFamily}` with all patent families contained in `ds`.
+Return a `Vector{<:`[`AbstractFamily`](@ref)`}` with all patent families contained in `ds`.
 May take a long time and/or cause memory overflow for large out-of-memory data sources.
 If a `filter` is specified, only families matching the filter are returned.
 

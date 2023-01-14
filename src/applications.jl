@@ -6,8 +6,8 @@ abstract type AbstractApplication end
 
 """
 An abstract type representing a reference to a patent application. Implementations
-should be coupled with an implementation of `AbstractDataSource` to allow lookup
-of the referenced application in the data source, using the `find_application` function.
+should be coupled with an implementation of  [`AbstractDataSource`](@ref) to allow lookup
+of the referenced application in the data source, using the [`find_application`](@ref) function.
 """
 abstract type AbstractApplicationReference end
 
@@ -98,7 +98,7 @@ default to `false`. The abstract reference implementation always returns `false`
 *Implementation advice:* There is no need to implement this for every possible combination
 of application and reference type. Usually, it will be enough to provide implementations for
 the application and reference types used by the same implementation package, and a generic
-implementation for `AbstractApplicationID` references.
+implementation for [`AbstractApplicationID`](@ref) references.
 """
 function refers_to(ref::AbstractApplicationReference, app::AbstractApplication)::Bool
     return false
@@ -117,7 +117,7 @@ end
 """
     applications(ds::AbstractDataSource[, filter::AbstractFilter], kwargs...)
 
-Return a `Vector{<:AbstractApplication}` with all applications contained in `ds`.
+Return a `Vector{<:`[`AbstractApplication`](@ref)`}` with all applications contained in `ds`.
 May take a long time and/or cause memory overflow for large out-of-memory data sources.
 If a `filter` is specified, only applications matching the filter are returned.
 
