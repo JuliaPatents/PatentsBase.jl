@@ -91,6 +91,14 @@ function citations(f::AbstractFamily)::Vector{<:AbstractCitation}
     return reduce(vcat, citations.(applications(f)))
 end
 
+# Alternative interface
+# struct PatentCitation end
+#
+# function citations(::PatentCitation, f::AbstractFamily) end
+# function citations(::NPLCitation, f::AbstractFamily) end
+# citations(f::AbstractFamily) = citations(::PatentCitation, f)
+
+
 """
     patent_citations(a::AbstractApplication)
     patent_citations(f::AbstractFamily)
@@ -125,8 +133,8 @@ function npl_citations(f::AbstractFamily)::Vector{<:AbstractNPLCitation}
 end
 
 """
-    citedby(a::AbstractApplication)
-    citedby(f::AbstractFamily)
+    forwardcitations(a::AbstractApplication)
+    forwardcitations(f::AbstractFamily)
 
 Return a `Vector{<:`[`AbstractPatentCitation`](@ref)`}` with citations of all patent applications known
 to cite a patent application or patent family.

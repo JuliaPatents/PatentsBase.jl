@@ -23,14 +23,9 @@ An abstract type representing an interface for a single claim associated with a 
 abstract type AbstractClaim  <: AbstractContent end
 
 """
-An abstract type representing an interface for the claims associated with a patent application.
-"""
-abstract type AbstractClaims  <: AbstractContent end
-
-"""
 An abstract type representing an interface for the full text of a patent application.
 """
-abstract type AbstractFulltext  <: AbstractContent end
+abstract type AbstractFulltext <: AbstractContent end
 
 "Abstract type representing a fulltext-searchable application content field."
 abstract type SearchableContentField end
@@ -130,7 +125,7 @@ end
 
 Return an [`AbstractClaims`](@ref) with information on patent claims contained in application `a`.
 """
-function claims(a::AbstractApplication)::(<:AbstractClaims)
+function claims(a::AbstractApplication)::(Vector{<:AbstractClaim})
     throw(ArgumentError("$(typeof(a)) does not contain claims information."))
 end
 
