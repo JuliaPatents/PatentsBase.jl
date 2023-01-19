@@ -9,7 +9,7 @@ export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, Leg
 
 export AbstractParty, AbstractApplicant, AbstractInventor
 
-export AbstractContent, AbstractTitle, AbstractShortDescription, AbstractClaim, AbstractClaims,
+export AbstractContent, AbstractTitle, AbstractShortDescription, AbstractClaim,
     AbstractFulltext
 
 export AbstractClassificationSystem, IPCLikeSystem, CPC, IPC,
@@ -34,16 +34,16 @@ export sourceid, id, jurisdiction, doc_number, kind
 export title, abstract, claims, fulltext, text
 
 # citations
-export citations, patent_citations, npl_citations, citedby, phase, application, doi, bibentry
+export citations, forwardcitations, phase, reference, doi, bibentry, citationgraph
 
 # application history
-export filingdate, publicationdate
+export date_published
 
 # technology classification
 export classification, symbol
 
 # family-specific functions
-export families, applications, siblings
+export families, aggregate_families, applications, siblings
 
 # portfolio-specific functions
 export owner
@@ -60,9 +60,6 @@ export AbstractFilter, ClassificationFilter, ContentFilter, UnionFilter, Interse
 
 # full-text search
 export SearchableContentField, TitleSearch, AbstractSearch, ClaimsSearch, FulltextSearch
-
-# computations
-export aggregate_families, citationgraph
 
 ### documentation templates
 include("docs/templates.jl")

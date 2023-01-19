@@ -125,7 +125,7 @@ end
 """
     citationgraph(families::Vector{<:AbstractFamily})
 
-Compute the graph of citations within a set of patent families or applications.
+Compute the graph of citations within a set of patent families.
 """
 function citationgraph(families::Vector{<:AbstractFamily})
     throw(ArgumentError("Cannot compute citation graph from $(typeof(families))."))
@@ -134,7 +134,7 @@ end
 """
     citationgraph(apps::Vector{<:AbstractApplication})
 
-Compute the graph of citations within a set of patent families or applications.
+Compute the graph of citations within a set of patent applications.
 """
 function citationgraph(apps::Vector{<:AbstractApplication})
     throw(ArgumentError("Cannot compute citation graph from $(typeof(apps))."))

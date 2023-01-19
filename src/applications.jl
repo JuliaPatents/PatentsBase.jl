@@ -89,6 +89,15 @@ function sourceid(a::Union{AbstractApplication, AbstractApplicationID})
 end
 
 """
+    date_published(a::AbstractApplication)
+
+Return the `Date` of publication of an application `a`.
+"""
+function date_published(a::AbstractApplication)::Date
+    throw(ArgumentError("$(typeof(a)) does not contain date information."))
+end
+
+"""
     refers_to(ref::AbstractApplicationReference, app::AbstractApplication)
 
 Return `true` if `app` is the application referenced by `ref`, and false otherwise.

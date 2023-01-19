@@ -14,6 +14,15 @@ function applications(f::AbstractFamily)::Vector{<:AbstractApplication}
 end
 
 """
+    date_published(f::AbstractFamily)
+
+Return the `Date` of publication of the earliest-published application in a family `f`.
+"""
+function date_published(f::AbstractFamily)::Date
+    minimum(date_published, applications(f))
+end
+
+"""
     siblings(a::AbstractApplication)
 
 return a `Vector{<:`[`AbstractApplication`](@ref)`}` with references to all applications that
@@ -49,7 +58,6 @@ function families(ds::AbstractDataSource, filter::AbstractFilter = AllFilter();
 
     throw(ArgumentError("$(typeof(ds)) does not allow retrieval of all families"))
 end
-
 
 """
     aggregate_families(apps::Vector{<:AbstractApplication})
