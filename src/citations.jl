@@ -55,7 +55,7 @@ function find_application(c::AbstractPatentCitation, ds::AbstractDataSource)::(<
 end
 
 """
-    bibentry(c::AbstractNPLCitation, lang::String)
+    bibentry(c::AbstractNPLCitation)
 
 Returns a `String` with the bibliography entry of the NPL citation `c`.
 """
@@ -64,7 +64,7 @@ function bibentry(c::AbstractNPLCitation)::String
 end
 
 """
-    external_ids(c::AbstractNPLCitation, lang::String)
+    external_ids(c::AbstractNPLCitation)
 
 Returns a `Vector{String}` with the external database IDs recorded for the NPL citation `c`.
 """
@@ -73,7 +73,7 @@ function external_ids(c::AbstractNPLCitation)::Vector{String}
 end
 
 """
-    doi(c::AbstractNPLCitation, lang::String)
+    doi(c::AbstractNPLCitation)
 
 Returns a `String` with the Digital Object Identifier (DOI) for NPL citation `c`.
 If multiple IDs matching the DOI format are found, the first is returned.

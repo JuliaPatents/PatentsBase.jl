@@ -55,7 +55,7 @@ PatentsBase.text
 PatentsBase.title(::AbstractApplication)
 PatentsBase.title(::AbstractApplication, ::String)
 PatentsBase.claims
-PatentsBase.description
+PatentsBase.abstract
 PatentsBase.fulltext
 ```
 
@@ -78,8 +78,6 @@ PatentsBase.bibentry
 PatentsBase.external_ids
 PatentsBase.doi
 PatentsBase.citations
-PatentsBase.patent_citations
-PatentsBase.npl_citations
 PatentsBase.forwardcitations
 PatentsBase.citationgraph
 ```
