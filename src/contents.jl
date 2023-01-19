@@ -1,7 +1,7 @@
 """
 An abstract type representing an interface for content fields of a patent application.
 There are five abstract content fields that are subtypes of this type:
-[`AbstractTitle`](@ref), [`AbstractDescription`](@ref), [`AbstractClaim`](@ref),
+[`AbstractTitle`](@ref), [`AbstractShortDescription`](@ref), [`AbstractClaim`](@ref),
 [`AbstractClaims`](@ref), and [`AbstractFulltext`](@ref).
 """
 abstract type AbstractContent end
@@ -15,7 +15,7 @@ abstract type AbstractTitle <: AbstractContent end
 An abstract type representing an interface for the abstract or short description of a patent.
 The type is deliberately not named "AbstractAbstract" to avoid confusion.
 """
-abstract type AbstractDescription  <: AbstractContent end
+abstract type AbstractShortDescription  <: AbstractContent end
 
 """
 An abstract type representing an interface for a single claim associated with a patent application.
@@ -130,11 +130,11 @@ function claims(a::AbstractApplication)::Vector{<:AbstractClaim}
 end
 
 """
-    description(a::AbstractApplication)
+    abstract(a::AbstractApplication)
 
-Return an [`AbstractDescription`](@ref) with the abstract of application a.
+Return an [`AbstractShortDescription`](@ref) with the abstract of application a.
 """
-function description(a::AbstractApplication)::(<:AbstractDescription)
+function abstract(a::AbstractApplication)::(<:AbstractShortDescription)
     throw(ArgumentError("$(typeof(a)) does not contain a description."))
 end
 

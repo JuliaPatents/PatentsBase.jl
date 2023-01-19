@@ -9,7 +9,7 @@ export AbstractApplication, AbstractFamily, AbstractPortfolio # Publication, Leg
 
 export AbstractParty, AbstractApplicant, AbstractInventor
 
-export AbstractContent, AbstractTitle, AbstractDescription, AbstractClaim, AbstractClaims,
+export AbstractContent, AbstractTitle, AbstractShortDescription, AbstractClaim, AbstractClaims,
     AbstractFulltext
 
 export AbstractClassificationSystem, IPCLikeSystem, CPC, IPC,
@@ -30,7 +30,7 @@ export applicants, inventors, name, names
 export sourceid, id, jurisdiction, doc_number, kind
 
 # content
-export title, description, claims, fulltext, text
+export title, abstract, claims, fulltext, text
 
 # citations
 export citations, patent_citations, npl_citations, citedby, phase, application, doi, bibentry

@@ -41,7 +41,7 @@ PatentsBase.refers_to
 ```@docs
 PatentsBase.AbstractContent
 PatentsBase.AbstractTitle
-PatentsBase.AbstractDescription
+PatentsBase.AbstractShortDescription
 PatentsBase.AbstractClaim
 PatentsBase.AbstractClaims
 PatentsBase.AbstractFulltext
