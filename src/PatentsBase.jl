@@ -17,7 +17,8 @@ export AbstractClassificationSystem, IPCLikeSystem, CPC, IPC,
     AbstractClassificationLevel, AbstractIPCLikeClassificationLevel,
     Section, Class, Subclass, Maingroup, Subgroup
 
-export AbstractCitation, AbstractPatentCitation, AbstractNPLCitation
+export AbstractCitation, AbstractPatentCitation, AbstractNPLCitation, AbstractCitationType,
+    PatentCitation, NPLCitation
 
 export AbstractDataSource, AbstractApplicationReference, AbstractApplicationID
 
