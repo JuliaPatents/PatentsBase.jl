@@ -16,6 +16,15 @@ a patent application.
 """
 abstract type AbstractNPLCitation <: AbstractCitation end
 
+""" An abstract type representing a type of citation, e.g. patent or NPL. """
+abstract type AbstractCitationType end
+
+""" Dispatch type for selecting patent citations. """
+struct PatentCitation <: AbstractCitationType end
+
+""" Dispatch type for selecting NPL citations. """
+struct NPLCitation <: AbstractCitationType end
+
 """
     phase(c::AbstractCitation)
 
@@ -76,60 +85,22 @@ function doi(c::AbstractNPLCitation)::Union{String, Nothing}
 end
 
 """
-    citations(a::AbstractApplication)
-    citations(f::AbstractFamily)
+    citations(a::AbstractApplication[, type::AbstractCitationType])
+    citations(f::AbstractFamily[, type::AbstractCitationType])
 
-Return a `Vector{<:`[`AbstractCitation`](@ref)`}` with all citations from a patent application or family.
+Return a `Vector{<:`[`AbstractCitation`](@ref)`}` with all citations of the given `type`
+from a patent application `a` or family `f`.
+
+`type` can either be [`PatentCitation`](@ref)`()` (default) or [`NPLCitation`](@ref)`()`.
 """
 function citations end
 
-function citations(a::AbstractApplication)::Vector{<:AbstractCitation}
+function citations(a::AbstractApplication, type::AbstractCitationType = PatentCitation())::Vector{<:AbstractCitation}
     throw(ArgumentError("$(typeof(a)) does not contain citation information."))
 end
 
-function citations(f::AbstractFamily)::Vector{<:AbstractCitation}
-    return reduce(vcat, citations.(applications(f)))
-end
-
-# Alternative interface
-# struct PatentCitation end
-#
-# function citations(::PatentCitation, f::AbstractFamily) end
-# function citations(::NPLCitation, f::AbstractFamily) end
-# citations(f::AbstractFamily) = citations(::PatentCitation, f)
-
-
-"""
-    patent_citations(a::AbstractApplication)
-    patent_citations(f::AbstractFamily)
-
-Return a vector `Vector{<:`[`AbstractPatentCitation`](@ref)`}` with all patent citations from a patent application
-or family.
-"""
-function patent_citations end
-
-function patent_citations(a::AbstractApplication)::Vector{<:AbstractPatentCitation}
-    throw(ArgumentError("$(typeof(a)) does not contain patent citation information."))
-end
-
-function patent_citations(f::AbstractFamily)::Vector{<:AbstractPatentCitation}
-    return reduce(vcat, patent_citations.(applications(f)))
-end
-
-"""
-    npl_citations(a::AbstractApplication)
-
-Return a `Vector{<:`[`AbstractNPLCitation`](@ref)`}` with all NPL citations from a patent application
-or family.
-"""
-function npl_citations end
-
-function npl_citations(a::AbstractApplication)::Vector{<:AbstractNPLCitation}
-    throw(ArgumentError("$(typeof(a)) does not contain NPL citation information."))
-end
-
-function npl_citations(f::AbstractFamily)::Vector{<:AbstractNPLCitation}
-    return reduce(vcat, patent_citations.(applications(f)))
+function citations(f::AbstractFamily, type::AbstractCitationType = PatentCitation())::Vector{<:AbstractCitation}
+    return reduce(vcat, (a -> citations(a, type)).(applications(f)))
 end
 
 """
@@ -154,6 +125,34 @@ end
 """
     citationgraph(families::Vector{<:AbstractFamily})
 
-Compute the graph created by family-to-family citations from `families`.
+Compute the graph of citations within a set of patent families or applications.
 """
-function citationgraph end
+function citationgraph(families::Vector{<:AbstractFamily})
+    throw(ArgumentError("Cannot compute citation graph from $(typeof(families))."))
+end
+
+"""
+    citationgraph(apps::Vector{<:AbstractApplication})
+
+Compute the graph of citations within a set of patent families or applications.
+"""
+function citationgraph(apps::Vector{<:AbstractApplication})
+    throw(ArgumentError("Cannot compute citation graph from $(typeof(apps))."))
+end
+
+"""
+    citationgraph(ds::AbstractDataSource, level::DataLevel[, filter::AbstractFilter])
+
+Compute a citation graph based on the data in an [`AbstractDataSource`](@ref).
+
+Parameters:
+
+- `ds`: An [`AbstractDataSource`](@ref) containing patent data.
+- `level`: The [`DataLevel`](@ref) on which to operate: ([`ApplicationLevel`](@ref)`()` or [`FamilyLevel`](@ref)`()`).
+- `filter`: Optional. An [`AbstractFilter`](@ref) to apply to the dataset before computing the graph.
+"""
+function citationgraph(ds::AbstractDataSource, level::DataLevel, filter::AbstractFilter)
+    throw(ArgumentError("Cannot compute citation graph from $(typeof(ds))."))
+end
+
+citationgraph(ds::AbstractDataSource, level::DataLevel) = citationgraph(ds, level, AllFilter())

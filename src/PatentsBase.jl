@@ -50,6 +50,9 @@ export owner
 # data sources and lookup
 export refers_to, find_application
 
+# data levels
+export DataLevel, ApplicationLevel, FamilyLevel
+
 # data filters
 export AbstractFilter, ClassificationFilter, ContentFilter, UnionFilter, IntersectionFilter,
     AllFilter
@@ -66,6 +69,7 @@ include("docs/templates.jl")
 ### Interface definitions
 
 include("datasources.jl")
+include("levels.jl")
 include("filters.jl")
 include("applications.jl")
 include("contents.jl")

@@ -123,9 +123,9 @@ end
 """
     claims(a::AbstractApplication)
 
-Return an [`AbstractClaims`](@ref) with information on patent claims contained in application `a`.
+Return a `Vector{<:`[`AbstractClaim`](@ref)`}` with information on patent claims contained in application `a`.
 """
-function claims(a::AbstractApplication)::(Vector{<:AbstractClaim})
+function claims(a::AbstractApplication)::Vector{<:AbstractClaim}
     throw(ArgumentError("$(typeof(a)) does not contain claims information."))
 end
 
