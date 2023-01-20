@@ -2,6 +2,7 @@ module PatentsBase
 
 using Dates
 using StructTypes
+using Graphs
 
 ### Basic patent information types
 

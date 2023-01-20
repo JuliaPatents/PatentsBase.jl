@@ -123,21 +123,56 @@ function forwardcitations(f::AbstractFamily)::Vector{<:AbstractPatentCitation}
 end
 
 """
+    citationgraph(applications::Vector{<:AbstractApplication})
     citationgraph(families::Vector{<:AbstractFamily})
 
-Compute the graph of citations within a set of patent families.
+Return a `SimpleDiGraph` representing the network of citations among `families` or
+`applications`.
+
+Node numbers in the graph correspond to indices in the input array.
+An edge from node i to node j indicates that j cited i and will be included in the
+output graph if the publication date of j is after that of i.
 """
-function citationgraph(families::Vector{<:AbstractFamily})
-    throw(ArgumentError("Cannot compute citation graph from $(typeof(families))."))
+function citationgraph end
+
+function citationgraph(applications::Vector{<:AbstractApplication})
+    graph = SimpleDiGraph(length(applications))
+    id2idx = Dict{String, Int}()
+    for i in 1:length(applications)
+        push!(id2idx, id(applications[i]) => i)
+    end
+    for i_citing in 1:length(applications)
+        citing = applications[i_citing]
+        for cited in id.(reference.(citations(citing)))
+            haskey(id2idx, cited) || continue
+            i_cited = id2idx[cited]
+            date_published(citing) > date_published(applications[i_cited]) || continue
+            add_edge!(graph, i_cited, i_citing)
+        end
+    end
+    return graph
 end
 
-"""
-    citationgraph(apps::Vector{<:AbstractApplication})
-
-Compute the graph of citations within a set of patent applications.
-"""
-function citationgraph(apps::Vector{<:AbstractApplication})
-    throw(ArgumentError("Cannot compute citation graph from $(typeof(apps))."))
+function citationgraph(families::Vector{<:AbstractFamily})
+    graph = SimpleDiGraph(length(families))
+    id2idx = Dict{String, Int}()
+    for i in 1:length(families)
+        for app in applications(families[i])
+            push!(id2idx, id(app) => i)
+        end
+    end
+    for i_citing in 1:length(families)
+        citing = families[i_citing]
+        for cited in id.(reference.(citations(citing)))
+            haskey(id2idx, cited) || continue
+            i_cited = id2idx[cited]
+            i_cited != i_citing || continue
+            date_published(citing) > date_published(families[i_cited]) || continue
+            has_edge(graph, i_cited, i_citing) && continue
+            add_edge!(graph, i_cited, i_citing)
+        end
+    end
+    return graph
 end
 
 """

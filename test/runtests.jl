@@ -1,6 +1,8 @@
 using PatentsBase
+using Dates
+using Graphs
 using Test
 
-@testset "PatentsBase.jl" begin
-    
-end
+include("dummies.jl")
+
+include("testsets/citationgraph.jl")
