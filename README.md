@@ -22,8 +22,8 @@ implement in addition to the base interface.
 
 ## Known implementations
 
-- [PatentsLens](https://github.com/JuliaPatents/PatentsLens): Reference implementation for using [lens.org](https://lens.org) data.
+- [PatentsLens](https://github.com/JuliaPatents/PatentsLens.jl): Reference implementation for using [lens.org](https://lens.org) data.
 
 ## Known extension packages
 
-- [PatentsLandscapes](https://github.com/JuliaPatents/PatentsLandscapes): Functions for taxonomy and statistical analysis of patent datasets.
+- [PatentsLandscapes](https://github.com/JuliaPatents/PatentsLandscapes.jl): Functions for taxonomy and statistical analysis of patent datasets.
