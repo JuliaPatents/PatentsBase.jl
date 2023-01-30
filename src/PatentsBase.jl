@@ -26,7 +26,7 @@ export AbstractDataSource, AbstractApplicationReference, AbstractApplicationID
 ### Interface functions
 
 # parties
-export applicants, inventors, name, names
+export applicants, inventors, name, names, country
 
 # document identifiers and base information
 export sourceid, id, jurisdiction, doc_number, kind
