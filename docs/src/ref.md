@@ -43,7 +43,6 @@ PatentsBase.AbstractContent
 PatentsBase.AbstractTitle
 PatentsBase.AbstractShortDescription
 PatentsBase.AbstractClaim
-PatentsBase.AbstractClaims
 PatentsBase.AbstractFulltext
 ```
 
@@ -96,7 +95,7 @@ PatentsBase.AbstractApplicant
 
 ```@docs
 PatentsBase.name
-PatentsBase.names
+PatentsBase.known_names
 PatentsBase.country
 PatentsBase.applicants
 PatentsBase.inventors

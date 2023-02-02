@@ -28,7 +28,7 @@ end
 name(a::AbstractApplicant) = first(known_names(a))
 
 """
-    names(a::AbstractParty)
+    known_names(a::AbstractParty)
 
 return a `Vector{String}` of all names under which party `p` is known to appear.
 """
