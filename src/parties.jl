@@ -25,14 +25,14 @@ function name(p::AbstractParty)::String
     throw(ArgumentError("$(typeof(p)) does not contain name information."))
 end
 
-name(a::AbstractApplicant) = first(names(a))
+name(a::AbstractApplicant) = first(known_names(a))
 
 """
     names(a::AbstractParty)
 
 return a `Vector{String}` of all names under which party `p` is known to appear.
 """
-function names(p::AbstractParty)::Vector{String}
+function known_names(p::AbstractParty)::Vector{String}
     throw(ArgumentError("$(typeof(p)) does not contain name information."))
 end
 
