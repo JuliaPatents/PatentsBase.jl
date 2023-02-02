@@ -32,10 +32,10 @@ export applicants, inventors, name, names, country
 export sourceid, id, jurisdiction, doc_number, kind
 
 # content
-export title, abstract, claims, fulltext, text
+export title, abstract, claims, fulltext, languages, text
 
 # citations
-export citations, forwardcitations, phase, reference, doi, bibentry, citationgraph
+export citations, forwardcitations, phase, reference, external_ids, doi, bibentry, citationgraph
 
 # application history
 export date_published
