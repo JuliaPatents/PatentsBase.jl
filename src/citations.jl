@@ -139,11 +139,11 @@ function citationgraph(applications::Vector{<:AbstractApplication})
     graph = SimpleDiGraph(length(applications))
     id2idx = Dict{String, Int}()
     for i in 1:length(applications)
-        push!(id2idx, id(applications[i]) => i)
+        push!(id2idx, sourceid(applications[i]) => i)
     end
     for i_citing in 1:length(applications)
         citing = applications[i_citing]
-        for cited in id.(reference.(citations(citing)))
+        for cited in sourceid.(reference.(citations(citing)))
             haskey(id2idx, cited) || continue
             i_cited = id2idx[cited]
             date_published(citing) > date_published(applications[i_cited]) || continue
