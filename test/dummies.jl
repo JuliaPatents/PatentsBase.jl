@@ -4,6 +4,7 @@ struct DummyID <: AbstractApplicationID
 end
 
 PatentsBase.id(i::DummyID) = i.id
+PatentsBase.sourceid(i::DummyID) = PatentsBase.id(i)
 
 struct DummyCitation <: AbstractPatentCitation
     id::DummyID
@@ -19,6 +20,7 @@ struct DummyApplication <: AbstractApplication
 end
 
 PatentsBase.id(a::DummyApplication) = id(a.id)
+PatentsBase.sourceid(a::DummyApplication) = id(a)
 PatentsBase.citations(a::DummyApplication, ::PatentCitation) = a.citations
 PatentsBase.date_published(a::DummyApplication) = a.date_published
 
