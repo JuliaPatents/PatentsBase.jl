@@ -47,7 +47,7 @@ export classification, symbol
 export families, aggregate_families, applications, siblings
 
 # portfolio-specific functions
-export owner
+export owner, portfolio
 
 # data sources and lookup
 export refers_to, find_application

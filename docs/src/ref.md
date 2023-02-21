@@ -26,6 +26,7 @@ PatentsBase.AbstractApplicationID
 ### Functions
 
 ```@docs
+PatentsBase.date_published
 PatentsBase.jurisdiction
 PatentsBase.doc_number
 PatentsBase.kind
@@ -66,6 +67,9 @@ PatentsBase.fulltext
 PatentsBase.AbstractCitation
 PatentsBase.AbstractPatentCitation
 PatentsBase.AbstractNPLCitation
+PatentsBase.AbstractCitationType
+PatentsBase.PatentCitation
+PatentsBase.NPLCitation
 ```
 
 ### Functions
@@ -146,6 +150,8 @@ PatentsBase.AbstractPortfolio
 PatentsBase.aggregate_families
 PatentsBase.applications(::AbstractFamily)
 PatentsBase.applications(::AbstractPortfolio)
+PatentsBase.families(::AbstractPortfolio)
+PatentsBase.portfolio
 PatentsBase.siblings
 PatentsBase.owner
 ```
@@ -156,13 +162,16 @@ PatentsBase.owner
 
 ```@docs
 PatentsBase.AbstractDataSource
+PatentsBase.DataLevel
+PatentsBase.ApplicationLevel
+PatentsBase.FamilyLevel
 ```
 
 ### Functions
 
 ```@docs
 PatentsBase.applications(::AbstractDataSource)
-PatentsBase.families
+PatentsBase.families(::AbstractDataSource)
 PatentsBase.find_application
 ```
 

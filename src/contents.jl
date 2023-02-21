@@ -2,7 +2,7 @@
 An abstract type representing an interface for content fields of a patent application.
 There are five abstract content fields that are subtypes of this type:
 [`AbstractTitle`](@ref), [`AbstractShortDescription`](@ref), [`AbstractClaim`](@ref),
-[`AbstractClaims`](@ref), and [`AbstractFulltext`](@ref).
+and [`AbstractFulltext`](@ref).
 """
 abstract type AbstractContent end
 
@@ -45,7 +45,7 @@ struct FulltextSearch <: SearchableContentField end
 """
     ContentFilter(
         search_query::String,
-        field::Union{SearchableContentField, Vector{<:SearchableContentField},
+        field::Union{SearchableContentField, Vector{<:SearchableContentField}},
         [languages::Vector{String}]
     )
 

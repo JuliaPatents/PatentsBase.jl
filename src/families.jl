@@ -23,10 +23,10 @@ function date_published(f::AbstractFamily)::Date
 end
 
 """
-    siblings(a::AbstractApplication)
+    siblings(a::AbstractApplicationReference)
 
-return a `Vector{<:`[`AbstractApplication`](@ref)`}` with references to all applications that
-are in the same family as `a`.
+return a `Vector{<:`[`AbstractApplicationReference`](@ref)`}` with references to all
+applications that are in the same family as `a`.
 """
 function siblings(a::AbstractApplication)::Vector{<:AbstractApplicationReference}
     throw(ArgumentError("$(typeof(a)) does not allow retrieval of sibling applications."))
