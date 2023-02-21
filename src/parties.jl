@@ -80,5 +80,5 @@ return a `Vector{<:`[`AbstractInventor`](@ref)`}` with the unique set of invento
 applications in family `f`.
 """
 function inventors(f::AbstractFamily)::Vector{<:AbstractInventor}
-    unique(reduce(vcat, applicants.(applications(f))))
+    unique(reduce(vcat, inventors.(applications(f))))
 end
