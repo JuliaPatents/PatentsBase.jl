@@ -1,7 +1,7 @@
 name = "PatentsBase"
 uuid = "b32246e4-6301-4a4b-8d75-0b3972dc1401"
 authors = ["Jakob Hoffmann <jfb-hoffmann@hotmail.de>, Alex Seitz <alex.seitz1@gmx.net>"]
-version = "0.1.4"
+version = "0.1.5"
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
